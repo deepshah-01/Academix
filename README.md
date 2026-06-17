@@ -1,2 +1,29 @@
 # Academix
-Academix is a smart student resource and attendance management system built with HTML, CSS, JavaScript, and LocalStorage to organize notes, PYQs, resources, bookmarks, and attendance in one place.
+
+Smart Student Resource & Attendance Management System
+
+## Features
+- User Authentication
+- Attendance Calculator
+- Notes Management
+- Resource Manager
+- Global Search
+- Bookmark System
+- Tags and Filters
+- Dashboard Analytics
+
+## Tech Stack
+- HTML5
+- CSS3
+- JavaScript
+- LocalStorage
+
+## Project Structure
+
+## Installation
+
+## Screenshots
+
+## Contributors
+
+## License
