@@ -5,3 +5,7 @@ function saveData(key, data) {
 function getData(key) {
     return JSON.parse(localStorage.getItem(key)) || [];
 }
+
+function removeData(key) {
+    localStorage.removeItem(key);
+}
