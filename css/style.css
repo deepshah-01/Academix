@@ -1,0 +1,409 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root{
+    --bg: #071126;
+    --bg-light: #0F1F3D;
+
+    --primary: #2563EB;      /* Blue */
+    --secondary: #10B981;    /* Green */
+
+    --accent: #FBBF24;       /* Yellow */
+
+    --white: #FFFFFF;
+    --text: #DCE7FF;
+
+    --card: rgba(255,255,255,0.05);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--white);
+    overflow-x:hidden;
+    position:relative;
+}
+
+/* Background Glow */
+
+body::before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:var(--primary);
+    top:-150px;
+    left:-150px;
+    filter:blur(180px);
+    opacity:.15;
+    z-index:-1;
+}
+
+body::after{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    background:var(--secondary);
+    bottom:-100px;
+    right:-100px;
+    filter:blur(180px);
+    opacity:.12;
+    z-index:-1;
+}
+
+/* Navbar */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:20px 8%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:rgba(7,17,38,.85);
+    backdrop-filter:blur(12px);
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+    z-index:1000;
+}
+
+.logo{
+    font-size:2rem;
+    font-weight:800;
+    color:var(--white);
+}
+
+.nav-links{
+    list-style:none;
+    display:flex;
+    gap:40px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:500;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:var(--secondary);
+}
+
+.signup-btn{
+    text-decoration:none;
+    color:white;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    padding:12px 25px;
+    border-radius:12px;
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.signup-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 30px rgba(37,99,235,.35);
+}
+
+/* Hero */
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:140px 20px 80px;
+}
+
+.badge{
+    background:rgba(16,185,129,.12);
+    color:var(--secondary);
+
+    border:1px solid rgba(16,185,129,.3);
+
+    padding:12px 24px;
+    border-radius:999px;
+
+    margin-bottom:35px;
+}
+
+.hero h1{
+    font-size:5rem;
+    font-weight:800;
+    line-height:1.05;
+    max-width:1000px;
+
+    animation:fadeUp 1s ease;
+}
+
+.hero h1 span{
+    display:block;
+
+    background:linear-gradient(
+        90deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    margin-top:30px;
+    max-width:750px;
+
+    color:var(--text);
+
+    font-size:1.15rem;
+    line-height:1.8;
+}
+
+/* Buttons */
+
+.hero-buttons{
+    margin-top:40px;
+
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.primary-btn{
+    text-decoration:none;
+    color:white;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    padding:16px 32px;
+    border-radius:14px;
+
+    font-weight:600;
+    transition:.3s;
+}
+
+.primary-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 30px rgba(37,99,235,.35);
+}
+
+.secondary-btn{
+    text-decoration:none;
+    color:white;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    padding:16px 32px;
+    border-radius:14px;
+
+    transition:.3s;
+}
+
+.secondary-btn:hover{
+    background:rgba(255,255,255,.05);
+}
+
+/* Floating Cards */
+
+.floating-container{
+    margin-top:80px;
+    width:800px;
+    height:220px;
+    position:relative;
+}
+
+.card{
+    position:absolute;
+
+    background:var(--card);
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(16,185,129,.15);
+
+    padding:20px 28px;
+    border-radius:18px;
+
+    font-weight:600;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.card1{
+    top:10px;
+    left:60px;
+    animation:float 5s infinite ease-in-out;
+}
+
+.card2{
+    top:60px;
+    right:50px;
+    animation:float 6s infinite ease-in-out;
+}
+
+.card3{
+    bottom:10px;
+    left:300px;
+    animation:float 4s infinite ease-in-out;
+}
+
+/* Animations */
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-18px);
+    }
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+    .hero h1{
+        font-size:4rem;
+    }
+
+    .floating-container{
+        width:100%;
+        height:auto;
+    }
+
+    .card{
+        position:relative;
+        margin:15px auto;
+        width:max-content;
+    }
+}
+
+@media(max-width:768px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero h1{
+        font-size:3rem;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .primary-btn,
+    .secondary-btn{
+        width:220px;
+        text-align:center;
+    }
+}
+
+
+/* Features */
+
+.features{
+    padding:100px 8%;
+    text-align:center;
+}
+
+.features h2{
+    font-size:3rem;
+    margin-bottom:50px;
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.feature-card{
+    background:var(--card);
+    border:1px solid rgba(255,255,255,.08);
+
+    padding:30px;
+    border-radius:20px;
+
+    transition:.3s;
+}
+
+.feature-card:hover{
+    transform:translateY(-10px);
+    border-color:var(--secondary);
+}
+
+.feature-card h3{
+    margin:15px 0;
+}
+
+
+/* About */
+
+.about{
+    padding:100px 8%;
+    text-align:center;
+}
+
+.about h2{
+    font-size:3rem;
+    margin-bottom:25px;
+}
+
+.about p{
+    max-width:800px;
+    margin:auto;
+
+    color:var(--text);
+
+    font-size:1.1rem;
+    line-height:1.8;
+}

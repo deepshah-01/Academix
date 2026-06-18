@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academix Dashboard</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h2 class="logo">Academix</h2>
+
+        <ul>
+            <li class="active">🏠 Dashboard</li>
+            <li>📊 Attendance</li>
+            <li>📚 Notes</li>
+            <li>📄 Resources</li>
+            <li>🔖 Bookmarks</li>
+            <li>👤 Profile</li>
+            <li onclick="logout()">🚪 Logout</li>
+        </ul>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="main-content">
+
+        <div class="top-bar">
+            <h1 id="welcome">Welcome</h1>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Attendance</h3>
+                <p>85%</p>
+            </div>
+
+            <div class="card">
+                <h3>Notes</h3>
+                <p>120 Files</p>
+            </div>
+
+            <div class="card">
+                <h3>Resources</h3>
+                <p>45 Links</p>
+            </div>
+
+            <div class="card">
+                <h3>Bookmarks</h3>
+                <p>18 Saved</p>
+            </div>
+
+        </div>
+
+        <div class="overview">
+
+            <div class="big-card">
+                <h2>Today's Overview</h2>
+
+                <p>
+                    Welcome to Academix. Manage your notes,
+                    attendance, resources and bookmarks from one place.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+</html>
