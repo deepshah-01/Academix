@@ -9,3 +9,7 @@ function getData(key) {
 function removeData(key) {
     localStorage.removeItem(key);
 }
+
+function clearStorage() {
+    localStorage.clear();
+}
