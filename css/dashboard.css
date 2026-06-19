@@ -48,6 +48,16 @@ body{
     transition:.3s;
 }
 
+/* .sidebar ul li a{
+
+    color: white;
+
+    text-decoration: none;
+
+    display: block;
+
+} */
+
 .sidebar li:hover,
 .sidebar .active{
     background:#1E293B;
