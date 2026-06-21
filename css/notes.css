@@ -16,6 +16,7 @@ body{
     background:#0F172A;
     color:white;
     padding:30px 20px;
+    min-height:100vh;
 }
 
 .logo{
@@ -109,14 +110,21 @@ section h2{
     box-shadow: 0 20px 40px rgba(59, 130, 246, 0.08);
 }
 #noteContent{
-    flex: 1;
-    min-height: 320px;
-    padding: 12px;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    resize: vertical;
-    overflow: auto;
+    flex:1;
+    min-height:320px;
+    padding:12px;
+    border:1px solid #e5e7eb;
+    border-radius:8px;
+    margin-bottom:12px;
+    overflow-y:auto;
+    outline:none;
+}
+
+#noteContent img{
+    max-width:100%;
+    display:block;
+    margin:10px 0;
+    border-radius:8px;
 }
 
 /*Notes list*/
@@ -228,6 +236,11 @@ section h2{
     border-radius: 6px;
 }
 
+.icon-btn:disabled{
+    opacity:0.5;
+    cursor:not-allowed;
+}
+
 .icon-btn:hover{background: rgba(59,130,246,0.06)}
 
 .primary{
@@ -280,13 +293,7 @@ section h2{
 
 .editor-toggles{display:flex;gap:8px}
 
-#noteContent{
-    padding: 12px;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    resize: vertical;
-}
+
 
 .note-item[data-pinned="true"]{
     border-left: 4px solid #f59e0b;

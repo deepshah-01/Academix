@@ -50,7 +50,10 @@ function createNoteItem(note) {
     const deleteBtn = clone.querySelector('.btn-delete');
 
     titleEl.textContent = note.title || 'Untitled note';
-    excerptEl.textContent = note.content ? note.content.slice(0, 80) : 'No content yet.';
+    const temp = document.createElement('div');
+    temp.innerHTML = note.content;
+
+    excerptEl.textContent = temp.textContent.slice(0, 80) || 'No content yet.';
 
     if (note.pinned) {
         clone.classList.add('pinned');
@@ -133,14 +136,20 @@ function updateToggleButtons(note) {
 }
 
 function updateModeButtons() {
+     if (!noteState.active) {
+        noteTitle.disabled = true;
+        noteContent.contentEditable = false;
+        return;
+    }
+
     if (noteState.mode === 'edit') {
         toggleViewBtn.textContent = 'Preview';
         noteTitle.disabled = false;
-        noteContent.disabled = false;
+        noteContent.contentEditable = true;
     } else {
         toggleViewBtn.textContent = 'Edit';
         noteTitle.disabled = true;
-        noteContent.disabled = true;
+        noteContent.contentEditable = false;
     }
 }
 
@@ -153,7 +162,7 @@ function selectNote(id) {
     noteState.active = true;
 
     noteTitle.value = note.title;
-    noteContent.value = note.content;
+    noteContent.innerHTML = note.content;
     updateToggleButtons(note);
     updateModeButtons();
     setEditorState(true);
@@ -165,14 +174,14 @@ function resetEditor() {
     noteState.mode = 'edit';
     noteState.active = true;
     noteTitle.value = '';
-    noteContent.value = '';
+    noteContent.innerHTML = '';
     updateToggleButtons({ pinned: false, bookmarked: false });
     updateModeButtons();
     setEditorState(true);
 }
 
 function saveNote() {
-    if (!noteTitle.value.trim() && !noteContent.value.trim()) {
+    if (!noteTitle.value.trim() && !noteContent.innerHTML.trim()) {
         return;
     }
 
@@ -180,7 +189,7 @@ function saveNote() {
     const noteData = {
         id: noteState.selectedId || `note-${Date.now()}`,
         title: noteTitle.value.trim() || 'Untitled note',
-        content: noteContent.value.trim(),
+        content: noteContent.innerHTML,
         pinned: pinToggle.classList.contains('active'),
         bookmarked: bookmarkToggle.classList.contains('active')
     };
@@ -256,3 +265,36 @@ function initNotes() {
 }
 
 window.addEventListener('DOMContentLoaded', initNotes);
+
+
+const imageToggle = document.getElementById("imageToggle");
+const imageInput = document.getElementById("imageInput");
+
+imageToggle.addEventListener("click", () => {
+
+    if (!noteState.active) return;
+
+    if (noteState.mode !== 'edit') {
+        alert("Switch to Edit mode to upload images.");
+        return;
+    }
+
+    imageInput.click();
+});
+
+imageInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+        const img = document.createElement("img");
+        img.src = event.target.result;
+
+        noteContent.appendChild(img);
+    };
+
+    reader.readAsDataURL(file);
+});

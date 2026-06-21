@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/notes.css">
 </head>
@@ -58,13 +57,20 @@
 
                 <div class="editor-header">
                     <input type="text" id="noteTitle" placeholder="Note Title...">
-                    <div class="editor-toggles">
+                    <div class="editor-toggles">  
+                        <button id="imageToggle" title="Upload Image" class="icon-btn"><i class="fa-solid fa-image"></i></button>
                         <button id="pinToggle" title="Pin/unpin note" class="icon-btn"><i class="fa-solid fa-thumbtack"></i></button>
                         <button id="bookmarkToggle" title="Bookmark/unbookmark" class="icon-btn"><i class="fa-solid fa-bookmark"></i></button>
                     </div>
                 </div>
+                
+                <input type="file" id="imageInput" accept="image/*" hidden>
 
-                <textarea id="noteContent" placeholder="Write your note here..."></textarea>
+                <div
+                    id="noteContent"
+                    class="editor-content"
+                    contenteditable="true">
+                </div>
 
                 <div class="editor-actions">
                     <button id="saveNoteBtn" class="primary">💾 Save</button>
