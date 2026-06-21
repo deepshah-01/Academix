@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Academix</title>
+
+    <link rel="stylesheet" href="css/resources.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h2 class="logo">Academix</h2>
+
+        <ul>
+
+            <li><a href="dashboard.html">🏠 Dashboard</a></li>
+
+            <li><a href="attendance.html">📊 Attendance</a></li>
+
+            <li><a href="notes.html">📚 Notes</a></li>
+
+            <li class="active">
+                <a href="resources.html">📄 Resources</a>
+            </li>
+
+            <li><a href="bookmarks.html">🔖 Bookmarks</a></li>
+
+            <li onclick="logout()">
+                🚪 Logout
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <h1>📄 Study Resources</h1>
+
+        <!-- Add Resource Form -->
+
+        <form id="resourceForm">
+
+            <input
+                type="text"
+                id="title"
+                placeholder="Resource Title"
+                required
+            >
+
+            <input
+                type="text"
+                id="subject"
+                placeholder="Subject"
+                required
+            >
+
+            <select id="category">
+
+                <option value="PDF">
+                    PDF Notes
+                </option>
+
+                <option value="PYQ">
+                    Previous Year Questions
+                </option>
+
+                <option value="Video">
+                    Video Lecture
+                </option>
+
+                <option value="Website">
+                    Website
+                </option>
+
+            </select>
+
+            <input
+                type="url"
+                id="url"
+                placeholder="Paste Resource Link"
+                required
+            >
+
+            <input
+                type="text"
+                id="tags"
+                placeholder="Tags (comma separated)"
+            >
+
+            <button type="submit">
+
+                Add Resource
+
+            </button>
+
+        </form>
+
+
+        <!-- Search -->
+
+        <input
+            type="text"
+            id="searchResource"
+            placeholder="Search resources..."
+        >
+
+
+        <!-- Resources List -->
+
+        <div id="resourceList">
+
+        </div>
+
+    </main>
+
+    <script src="js/storage.js"></script>
+    <script src="js/resources.js"></script>
+
+</body>
+</html>

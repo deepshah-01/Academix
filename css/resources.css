@@ -1,0 +1,249 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,sans-serif;
+}
+
+body{
+    display:flex;
+    min-height:100vh;
+    background:#F4F8FF;
+}
+
+/* Sidebar */
+
+.sidebar{
+    width:260px;
+    background:#0F172A;
+    color:white;
+    padding:30px 20px;
+}
+
+.logo{
+    color:#3B82F6;
+    margin-bottom:40px;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:10px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.sidebar li:hover,
+.sidebar .active{
+    background:#1E293B;
+}
+
+.sidebar li a{
+    text-decoration:none;
+    color:white;
+    display:block;
+}
+
+/* Main */
+
+.main-content{
+    flex:1;
+    padding:30px;
+}
+
+.main-content h1{
+    margin-bottom:20px;
+    color:#1E293B;
+}
+
+/* Form */
+
+#resourceForm{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+
+    display:grid;
+    gap:15px;
+
+    margin-bottom:25px;
+}
+
+#resourceForm input,
+#resourceForm select{
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    outline:none;
+
+}
+
+#resourceForm button{
+
+    background:#3B82F6;
+
+    color:white;
+
+    border:none;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:16px;
+}
+
+#resourceForm button:hover{
+
+    background:#2563EB;
+
+}
+
+/* Search */
+
+#searchResource{
+
+    width:100%;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    border:1px solid #ddd;
+
+    margin-bottom:20px;
+
+}
+
+/* Resource Cards */
+
+#resourceList{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fill,minmax(300px,1fr));
+
+    gap:20px;
+
+}
+
+.resource-card{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+
+}
+
+.resource-card h2{
+
+    color:#1E293B;
+
+    margin-bottom:15px;
+
+}
+
+.resource-card p{
+
+    margin-bottom:10px;
+
+    color:#475569;
+
+}
+
+.tags{
+
+    color:#2563EB;
+
+    font-size:14px;
+
+    margin-bottom:15px;
+
+}
+
+/* Buttons */
+
+.resource-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.openBtn{
+
+    background:#22C55E;
+
+    color:white;
+
+    border:none;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    text-decoration:none;
+}
+
+.bookmarkBtn{
+
+    background:#F59E0B;
+
+    color:white;
+
+    border:none;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+.deleteBtn{
+
+    background:#EF4444;
+
+    color:white;
+
+    border:none;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    body{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+    }
+
+}
