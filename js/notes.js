@@ -22,12 +22,46 @@ function loadFromLocalStorage() {
     }
 }
 
+function addActivity(text) {
+
+    let activity =
+        JSON.parse(
+            localStorage.getItem("activity")
+        ) || [];
+
+    activity.unshift({
+
+        text,
+
+        time:
+            new Date()
+                .toLocaleString()
+
+    });
+
+    if (activity.length > 10) {
+
+        activity.pop();
+
+    }
+
+    localStorage.setItem(
+
+        "activity",
+
+        JSON.stringify(activity)
+
+    );
+
+}
+
 const newNoteBtn = document.getElementById('newNoteBtn');
 const searchNote = document.getElementById('searchNote');
 const pinnedList = document.getElementById('pinnedList');
 const notesList = document.getElementById('notesList');
 const noteTitle = document.getElementById('noteTitle');
 const noteContent = document.getElementById('noteContent');
+const noteTags = document.getElementById('noteTags');
 const saveNoteBtn = document.getElementById('saveNoteBtn');
 const deleteNoteBtn = document.getElementById('deleteNoteBtn');
 const pinToggle = document.getElementById('pinToggle');
@@ -54,6 +88,16 @@ function createNoteItem(note) {
     temp.innerHTML = note.content;
 
     excerptEl.textContent = temp.textContent.slice(0, 80) || 'No content yet.';
+
+    if (note.tags.length > 0) {
+
+        excerptEl.textContent +=
+
+            "\n#" +
+
+            note.tags.join(" #");
+
+    }
 
     if (note.pinned) {
         clone.classList.add('pinned');
@@ -96,7 +140,26 @@ function renderNotes() {
 
     const filtered = noteState.notes.filter(note => {
         const query = searchNote.value.toLowerCase();
-        return note.title.toLowerCase().includes(query) || note.content.toLowerCase().includes(query);
+        return (
+
+            note.title
+                .toLowerCase()
+                .includes(query)
+
+            ||
+
+            note.content
+                .toLowerCase()
+                .includes(query)
+
+            ||
+
+            note.tags
+                .join(" ")
+                .toLowerCase()
+                .includes(query)
+
+        );
     });
 
     const pinnedNotes = filtered.filter(note => note.pinned);
@@ -163,6 +226,8 @@ function selectNote(id) {
 
     noteTitle.value = note.title;
     noteContent.innerHTML = note.content;
+    noteTags.value =
+    note.tags.join(",");
     updateToggleButtons(note);
     updateModeButtons();
     setEditorState(true);
@@ -175,6 +240,7 @@ function resetEditor() {
     noteState.active = true;
     noteTitle.value = '';
     noteContent.innerHTML = '';
+    noteTags.value="";
     updateToggleButtons({ pinned: false, bookmarked: false });
     updateModeButtons();
     setEditorState(true);
@@ -187,11 +253,29 @@ function saveNote() {
 
     const existingIndex = noteState.notes.findIndex(item => item.id === noteState.selectedId);
     const noteData = {
+
         id: noteState.selectedId || `note-${Date.now()}`,
+
         title: noteTitle.value.trim() || 'Untitled note',
+
         content: noteContent.innerHTML,
+
         pinned: pinToggle.classList.contains('active'),
-        bookmarked: bookmarkToggle.classList.contains('active')
+
+        bookmarked: bookmarkToggle.classList.contains('active'),
+
+        tags:
+            noteTags.value
+                .split(",")
+                .map(
+                    tag => tag.trim()
+                )
+                .filter(
+                    tag => tag !== ""
+                ),
+        createdAt:
+            new Date().toLocaleString()
+
     };
 
     if (existingIndex >= 0) {
@@ -202,6 +286,13 @@ function saveNote() {
     }
 
     saveToLocalStorage();
+    addActivity(
+
+        "Added note : " +
+
+        noteData.title
+
+    );
     resetEditor();
     renderNotes();
 }
@@ -211,6 +302,9 @@ function removeNote(id) {
     if (noteState.selectedId === id) {
         resetEditor();
     }
+    addActivity(
+        "Deleted note"
+    );
     saveToLocalStorage();
     renderNotes();
 }
@@ -219,6 +313,15 @@ function togglePin(id) {
     const note = noteState.notes.find(item => item.id === id);
     if (!note) return;
     note.pinned = !note.pinned;
+    addActivity(
+
+        note.pinned
+            ?
+            "Pinned note"
+            :
+            "Unpinned note"
+
+    );
     saveToLocalStorage();
     renderNotes();
     if (noteState.selectedId === id) {
