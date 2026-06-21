@@ -6,6 +6,8 @@ let resources = getData("resources");
 
 let editId = null;
 
+let currentFilter = "ALL";
+
 const resourceForm =
     document.getElementById(
         "resourceForm"
@@ -30,11 +32,11 @@ const searchResource =
     );
 
 function addResource(
-    title,
-    subject,
-    category,
-    url,
-    tags
+title,
+subject,
+type,
+url,
+tags
 ) {
 
     const isEditing = editId !== null;
@@ -47,7 +49,7 @@ function addResource(
 
         subject,
 
-        category,
+        type,
 
         url,
 
@@ -76,7 +78,7 @@ function addResource(
 
             subject,
 
-            category,
+            type,
 
             url,
 
@@ -126,9 +128,9 @@ resourceForm.addEventListener(
                 "subject"
             ).value;
 
-        const category =
+        const type =
             document.getElementById(
-                "category"
+                "type"
             ).value;
 
         const url =
@@ -154,7 +156,7 @@ resourceForm.addEventListener(
 
             subject,
 
-            category,
+            type,
 
             url,
 
@@ -177,105 +179,138 @@ function renderResources() {
         searchResource.value
             .toLowerCase();
 
-    const filteredResources =
-        resources.filter(resource =>
+    let filteredResources =
+        resources.filter(
 
-            resource.title
-                .toLowerCase()
-                .includes(query)
+            resource =>
 
-            ||
+                resource.title
+                    .toLowerCase()
+                    .includes(query)
 
-            resource.subject
-                .toLowerCase()
-                .includes(query)
+                ||
 
-            ||
+                resource.subject
+                    .toLowerCase()
+                    .includes(query)
 
-            resource.category
-                .toLowerCase()
-                .includes(query)
+                ||
 
-            ||
+                resource.type
+                    .toLowerCase()
+                    .includes(query)
 
-            resource.tags
-                .join(" ")
-                .toLowerCase()
-                .includes(query)
+                ||
+
+                resource.tags
+                    .join(" ")
+                    .toLowerCase()
+                    .includes(query)
 
         );
 
-    filteredResources.forEach(
+    if (currentFilter !== "ALL") {
 
-        resource => {
+        filteredResources =
 
-            resourceList.innerHTML +=
+            filteredResources.filter(
 
-                `
-            <div class="resource-card">
+                resource =>
 
-                <h2>${resource.title}</h2>
+                    resource.type === currentFilter
 
-                <p>
-                    Subject :
-                    ${resource.subject}
-                </p>
+            );
 
-                <p>
-                    Category :
-                    ${resource.category}
-                </p>
+    }
+    // Show cards
+    filteredResources.forEach(resource => {
 
-                <p>
-                    Added :
-                    ${resource.createdAt}
-                </p>
+        resourceList.innerHTML += `
 
-                <p class="tags">
+        <div class="resource-card">
 
-                    #${resource.tags.join(" #")}
+            <h2>
 
-                </p>
+                ${getIcon(resource.type)}
 
-                <div class="resource-buttons">
+                ${resource.title}
 
-                    <button
-                        onclick="openResource('${resource.url}')"
-                    >
-                        Open
-                    </button>
+            </h2>
 
-                    <button
-                        onclick="toggleBookmark(${resource.id})"
-                    >
-                        ${resource.bookmarked
+            <p>
+                Subject :
+                ${resource.subject}
+            </p>
+
+            <p>
+                Type :
+                ${resource.type}
+            </p>
+
+            <p>
+                Added :
+                ${resource.createdAt}
+            </p>
+
+            <p class="tags">
+
+                #${resource.tags.join(" #")}
+
+            </p>
+
+            <div class="resource-buttons">
+
+                <button
+                    onclick="openResource('${resource.url}')"
+                >
+                    Open
+                </button>
+
+                <button
+                    onclick="toggleBookmark(${resource.id})"
+                >
+                    ${resource.bookmarked
                     ?
                     "Unbookmark"
                     :
                     "Bookmark"
                 }
-                    </button>
+                </button>
 
-                    <button
-                        onclick="editResource(${resource.id})"
-                    >
-                        Edit
-                    </button>
+                <button
+                    onclick="editResource(${resource.id})"
+                >
+                    Edit
+                </button>
 
-                    <button
-                        onclick="deleteResource(${resource.id})"
-                    >
-                        Delete
-                    </button>
-
-                </div>
+                <button
+                    onclick="deleteResource(${resource.id})"
+                >
+                    Delete
+                </button>
 
             </div>
-            `;
 
-        }
+        </div>
 
-    );
+        `;
+
+    });
+
+    // Empty state
+    if (filteredResources.length === 0) {
+
+        resourceList.innerHTML =
+
+        `
+        <div class="empty-state">
+
+            No resources found
+
+        </div>
+        `;
+
+    }
 
 }
 
@@ -285,6 +320,14 @@ function openResource(url){
         url,
         "_blank"
     );
+
+}
+
+function setFilter(type){
+
+    currentFilter = type;
+
+    renderResources();
 
 }
 
@@ -381,8 +424,9 @@ function editResource(id){
     ).value = resource.subject;
 
     document.getElementById(
-        "category"
-    ).value = resource.category;
+        "type"
+    ).value =
+        resource.type;
 
     document.getElementById(
         "url"
@@ -395,6 +439,34 @@ function editResource(id){
         resource.tags.join(",");
 
     editId = id;
+
+}
+
+function getIcon(type){
+
+    switch(type){
+
+        case "PDF":
+            return "📄";
+
+        case "PPT":
+            return "📊";
+
+        case "VIDEO":
+            return "🎥";
+
+        case "PYQ":
+            return "📝";
+
+        case "LINK":
+            return "🔗";
+
+        case "BOOK":
+            return "📚";
+
+        default:
+            return "📁";
+    }
 
 }
 

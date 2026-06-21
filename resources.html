@@ -62,24 +62,23 @@
                 required
             >
 
-            <select id="category">
 
-                <option value="PDF">
-                    PDF Notes
-                </option>
-
-                <option value="PYQ">
-                    Previous Year Questions
-                </option>
-
-                <option value="Video">
-                    Video Lecture
-                </option>
-
-                <option value="Website">
-                    Website
-                </option>
-
+            <label>Resource Type</label>
+            
+            <select id="type">
+            
+                <option value="PDF">📄 PDF Notes</option>
+            
+                <option value="PPT">📊 PPT</option>
+            
+                <option value="VIDEO">🎥 Video Lecture</option>
+            
+                <option value="PYQ">📝 Previous Year Questions</option>
+            
+                <option value="LINK">🔗 Link</option>
+            
+                <option value="BOOK">📚 Book</option>
+            
             </select>
 
             <input
@@ -112,7 +111,37 @@
             placeholder="Search resources..."
         >
 
-
+        <div class="filter-buttons">
+        
+            <button onclick="setFilter('ALL')">
+                All
+            </button>
+        
+            <button onclick="setFilter('PDF')">
+                📄 PDF
+            </button>
+        
+            <button onclick="setFilter('PPT')">
+                📊 PPT
+            </button>
+        
+            <button onclick="setFilter('VIDEO')">
+                🎥 Video
+            </button>
+        
+            <button onclick="setFilter('PYQ')">
+                📝 PYQ
+            </button>
+        
+            <button onclick="setFilter('LINK')">
+                🔗 Link
+            </button>
+        
+            <button onclick="setFilter('BOOK')">
+                📚 Book
+            </button>
+        
+        </div>
         <!-- Resources List -->
 
         <div id="resourceList">
