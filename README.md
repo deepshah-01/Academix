@@ -84,6 +84,9 @@ Academix is a front-end student productivity app for managing notes, attendance,
 ## Deployment
 Deploy the project with Netlify, Vercel, or GitHub Pages.
 
+## Live Demo
+https://academix-plum.vercel.app
+
 ## Notes
 - Uploaded files are stored as data URLs in `localStorage`, so smaller files work best.
 - Dark mode is applied automatically across supported pages.
