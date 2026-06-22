@@ -1,0 +1,186 @@
+.main-content h1{
+    color:#1E293B;
+    margin-bottom:20px;
+}
+
+/* Search */
+
+#searchBookmark{
+    width:100%;
+    padding:14px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    margin-bottom:20px;
+    outline:none;
+}
+
+/* Filters */
+
+.filter-buttons{
+    display:flex;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.filter-buttons button{
+    border:none;
+    background:#3B82F6;
+    color:white;
+    padding:10px 16px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* Bookmark list */
+
+#bookmarkList{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fill,minmax(320px,1fr));
+    gap:20px;
+}
+
+/* Card */
+
+.bookmark-card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 3px 8px rgba(0,0,0,.05);
+}
+
+.bookmark-card h2{
+    color:#1E293B;
+    margin-bottom:12px;
+}
+
+.bookmark-card p{
+    color:#6B7280;
+    margin-bottom:8px;
+}
+
+/* Tags */
+
+.tags{
+    color:#3B82F6;
+    font-size:14px;
+    margin-top:10px;
+}
+
+/* Buttons */
+
+.bookmark-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.bookmark-buttons button{
+    border:none;
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.open-btn{
+    background:#3B82F6;
+    color:white;
+}
+
+.remove-btn{
+    background:#EF4444;
+    color:white;
+}
+
+/* Empty state */
+
+.empty-state{
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    text-align:center;
+    color:#6B7280;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+    body{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        min-height:auto;
+    }
+
+}
+
+
+.bookmark-controls{
+
+    display: flex;
+
+    gap: 15px;
+
+    align-items: center;
+
+    margin: 20px 0;
+
+    flex-wrap: wrap;
+
+}
+
+#searchBookmark{
+
+    flex: 1;
+
+    min-width: 220px;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+}
+
+#sortBookmarks{
+
+    padding: 12px 16px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: white;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    min-width: 160px;
+
+}
+
+@media(max-width:768px){
+
+    .bookmark-controls{
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+    #sortBookmarks{
+
+        width: 100%;
+
+    }
+
+}

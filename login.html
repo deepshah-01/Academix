@@ -1,58 +1,69 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <title>Login - Academix</title>
-
-        <link rel="stylesheet" href="css/auth.css">
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Academix</title>
+    <link rel="stylesheet" href="css/auth.css">
+</head>
 <body>
+    <main class="auth-shell">
+        <section class="auth-hero" aria-label="Academix introduction">
+            <div class="brand">Academix</div>
+            <h1>Welcome back to your academic dashboard.</h1>
+            <p>Pick up where you left off, track notes, manage resources, and stay on top of attendance from one clean workspace.</p>
+            <ul class="auth-highlights">
+                <li>Keep notes, bookmarks, and resources in sync.</li>
+                <li>Use dark mode across the app automatically.</li>
+                <li>Store your progress with localStorage.</li>
+            </ul>
+        </section>
 
-<div class="auth-container">
+        <section class="auth-panel" aria-label="Login form">
+            <div class="auth-card">
+                <h2>Login to your account</h2>
+                <p class="subtitle">Use the email and password you created during signup.</p>
 
-    <div class="login-card">
+                <form id="loginForm" class="auth-form">
+                    <label class="field" for="email">
+                        <span>Email address</span>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </label>
 
-        <h1 class="logo">Academix</h1>
+                    <label class="field" for="password">
+                        <span>Password</span>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+                    </label>
 
-        <p class="subtitle">
-            Welcome Back 👋
-        </p>
+                    <button type="submit">Login</button>
+                </form>
 
-        <h2>Login to Your Account</h2>
+                <p class="auth-link">
+                    Don't have an account?
+                    <a href="signup.html">Create account</a>
+                </p>
+            </div>
+        </section>
+    </main>
 
-        <form id="loginForm">
-
-            <input
-                type="email"
-                id="email"
-                placeholder="Email Address"
-                required
-            >
-
-            <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                required
-            >
-
-            <button type="submit">
-                Login
-            </button>
-
-        </form>
-
-        <p class="signup-link">
-            Don't have an account?
-            <a href="signup.html">Create Account</a>
-        </p>
-
-    </div>
-
-</div>
-
-<script src="js/login.js"></script>
-
+    <script src="js/storage.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        redirectIfLoggedIn();
+    </script>
 </body>
 </html>

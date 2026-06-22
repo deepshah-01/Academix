@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmarks - Academix</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/bookmarks.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h2 class="logo">Academix</h2>
+
+        <ul>
+
+            <li>
+                <a href="dashboard.html">
+                    🏠 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="attendance.html">
+                    📊 Attendance
+                </a>
+            </li>
+
+            <li>
+                <a href="notes.html">
+                    📚 Notes
+                </a>
+            </li>
+
+            <li>
+                <a href="resources.html">
+                    📄 Resources
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="bookmarks.html">
+                    🔖 Bookmarks
+                </a>
+            </li>
+
+            <li>
+                <a href="search.html">
+                    🔍 Global Search
+                </a>
+            </li>
+
+            <li>
+                <a href="profile.html">
+                    👤 Profile
+                </a>
+            </li>
+
+            <li onclick="logout()">
+                🚪 Logout
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <h1>🔖 My Bookmarks</h1>
+
+        <!-- Search -->
+
+        <div class="bookmark-controls">
+        
+            <input type="text" id="searchBookmark" placeholder="Search bookmarks...">
+        
+            <select id="sortBookmarks" onchange="setSortOrder(this.value)">
+        
+                <option value="NEWEST">
+                    Newest First
+                </option>
+        
+                <option value="OLDEST">
+                    Oldest First
+                </option>
+        
+            </select>
+        
+        </div>
+
+        <!-- Filter Buttons -->
+
+        <div class="filter-buttons">
+
+            <button
+                onclick="setBookmarkFilter('ALL')"
+            >
+                All
+            </button>
+
+            <button
+                onclick="setBookmarkFilter('NOTES')"
+            >
+                📚 Notes
+            </button>
+
+            <button
+                onclick="setBookmarkFilter('RESOURCES')"
+            >
+                📄 Resources
+            </button>
+
+        </div>
+
+        <!-- Bookmark Cards -->
+
+        <div id="bookmarkList">
+
+        </div>
+
+    </main>
+
+    <script src="js/storage.js"></script>
+    <script src="js/bookmarks.js"></script>
+    <script src="js/theme.js"></script>
+
+</body>
+</html>

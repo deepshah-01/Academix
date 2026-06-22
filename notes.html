@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes - Academix</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/notes.css">
+</head>
+<body>
+    <aside class="sidebar">
+
+        <h2 class="logo">Academix</h2>
+
+        <ul>
+            <li><a href = "dashboard.html" >🏠 Dashboard</a></li>
+            <li><a href = "attendance.html" >📊 Attendance</a></li>
+            <li class="active"><a href = "notes.html" >📚 Notes</a></li>
+            <li><a href = "resources.html" >📄 Resources</a></li>
+            <li><a href = "bookmarks.html" >🔖 Bookmarks</a></li>
+            <li>
+                <a href="search.html">
+                    🔍 Global Search
+                </a>
+            </li>
+            <li><a href = "profile.html" >👤 Profile</a></li>
+            <li onclick="logout()">🚪 Logout</li>
+        </ul>
+
+    </aside>
+
+    <main class="main-content">
+        <h1>📚 My Notes</h1>
+
+        <div class="notes-layout">
+
+            <!-- Left Panel -->
+            <div class="notes-sidebar">
+
+                <button id="newNoteBtn">+ New Note</button>
+
+                <input type="text" id="searchNote" placeholder="Search notes...">
+
+                <div class="pinned-section">
+                    <h3>Pinned</h3>
+                    <div id="pinnedList" class="notes-list"></div>
+                </div>
+
+                <div class="all-notes">
+                    <h3>All Notes</h3>
+                    <div id="notesList" class="notes-list"></div>
+                </div>
+
+            </div>
+
+            <!-- Right Panel: editor -->
+            <div class="note-editor">
+
+                <div class="editor-header">
+                    <input type="text" id="noteTitle" placeholder="Note Title...">
+                    <input type="text" id="noteTags" placeholder="Tags (comma separated)">
+                    <div class="editor-toggles">  
+                        <button id="imageToggle" title="Upload Image" class="icon-btn"><i class="fa-solid fa-image"></i></button>
+                        <button id="pinToggle" title="Pin/unpin note" class="icon-btn"><i class="fa-solid fa-thumbtack"></i></button>
+                        <button id="bookmarkToggle" title="Bookmark/unbookmark" class="icon-btn"><i class="fa-solid fa-bookmark"></i></button>
+                    </div>
+                </div>
+                
+                <input type="file" id="imageInput" accept="image/*" hidden>
+
+                <div
+                    id="noteContent"
+                    class="editor-content"
+                    contenteditable="true">
+                </div>
+
+                <div class="editor-actions">
+                    <button id="saveNoteBtn" class="primary">💾 Save</button>
+                    <button id="deleteNoteBtn" class="danger">🗑 Delete</button>
+                    <button id="toggleViewBtn" class="secondary">Preview</button>
+                </div>
+
+                <template id="noteItemTemplate">
+                    <div class="note-item" data-id="" data-pinned="false" data-bookmarked="false">
+                        <div class="note-preview">
+                            <div class="note-title">Note title</div>
+                            <div class="note-excerpt">Short preview of the note content...</div>
+                        </div>
+                        <div class="note-actions">
+                            <button class="btn btn-edit" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="btn btn-pin" title="Pin"><i class="fa-solid fa-thumbtack"></i></button>
+                            <button class="btn btn-bookmark" title="Bookmark"><i class="fa-solid fa-bookmark"></i></button>
+                            <button class="btn btn-delete" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+
+        </div>
+    </main>
+    <script src="js/notes.js"></script>
+    <script src="js/theme.js"></script>
+</body>
+</html>

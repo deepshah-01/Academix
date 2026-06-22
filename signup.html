@@ -1,68 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Signup - Academix</title>
-
-<link rel="stylesheet" href="css/auth.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - Academix</title>
+    <link rel="stylesheet" href="css/auth.css">
 </head>
 <body>
+    <main class="auth-shell">
+        <section class="auth-hero" aria-label="Academix introduction">
+            <div class="brand">Academix</div>
+            <h1>Create your study hub in minutes.</h1>
+            <p>Organize notes, attendance, resources, bookmarks, and search in one place so you can spend less time juggling tabs and more time learning.</p>
+            <ul class="auth-highlights">
+                <li>Save everything locally with localStorage.</li>
+                <li>Switch themes across all pages instantly.</li>
+                <li>Built for a clean, hackathon-ready workflow.</li>
+            </ul>
+        </section>
 
-<div class="container">
+        <section class="auth-panel" aria-label="Signup form">
+            <div class="auth-card">
+                <h2>Create account</h2>
+                <p class="subtitle">Fill in your academic details to personalize the dashboard.</p>
 
-    <div class="left-panel">
+                <form id="signupForm" class="auth-form">
+                    <label class="field" for="name">
+                        <span>Full name</span>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Your full name"
+                            autocomplete="name"
+                            required
+                        >
+                    </label>
 
-        <h1>Academix</h1>
+                    <label class="field" for="email">
+                        <span>Email address</span>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </label>
 
-        <h2>Your Academic Journey, Organized.</h2>
+                    <label class="field" for="password">
+                        <span>Password</span>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            required
+                        >
+                    </label>
 
-        <p>
-            Manage notes, attendance, PYQs and resources
-            from one unified student dashboard.
-        </p>
+                    <label class="field" for="confirmPassword">
+                        <span>Confirm password</span>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Repeat your password"
+                            autocomplete="new-password"
+                            required
+                        >
+                    </label>
 
-    </div>
+                    <label class="field" for="university">
+                        <span>University</span>
+                        <input
+                            type="text"
+                            id="university"
+                            name="university"
+                            placeholder="Your university"
+                            autocomplete="organization"
+                            required
+                        >
+                    </label>
 
-    <div class="right-panel">
+                    <label class="field" for="course">
+                        <span>Course</span>
+                        <input
+                            type="text"
+                            id="course"
+                            name="course"
+                            placeholder="Your course"
+                            autocomplete="off"
+                            required
+                        >
+                    </label>
 
-        <div class="form-box">
+                    <label class="field" for="year">
+                        <span>Year</span>
+                        <select id="year" name="year" required>
+                            <option value="">Select year</option>
+                            <option value="1st Year">1st Year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                            <option value="4th Year">4th Year</option>
+                        </select>
+                    </label>
 
-            <h2>Create Account</h2>
+                    <button type="submit">Create account</button>
+                </form>
 
-            <form id="signupForm">
+                <p class="auth-link">
+                    Already have an account?
+                    <a href="login.html">Login</a>
+                </p>
+            </div>
+        </section>
+    </main>
 
-                <input type="text" id="name" placeholder="Full Name" required>
-                <input type="email" id="email" placeholder="Email Address" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-                <input type="text" id="university" placeholder="University" required>
-                <input type="text" id="course" placeholder="Course" required>
-
-                <select id="year" required>
-                    <option value="">Select Year</option>
-                    <option>1st Year</option>
-                    <option>2nd Year</option>
-                    <option>3rd Year</option>
-                    <option>4th Year</option>
-                </select>
-
-                <button type="submit">
-                    Create Account
-                </button>
-
-            </form>
-
-            <p class="login-link">
-                Already have an account?
-                <a href="login.html">Login</a>
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-<script src="js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        redirectIfLoggedIn();
+    </script>
 </body>
 </html>

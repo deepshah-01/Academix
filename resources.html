@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Academix</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/resources.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h2 class="logo">Academix</h2>
+
+        <ul>
+
+            <li><a href="dashboard.html">🏠 Dashboard</a></li>
+
+            <li><a href="attendance.html">📊 Attendance</a></li>
+
+            <li><a href="notes.html">📚 Notes</a></li>
+
+            <li class="active">
+                <a href="resources.html">📄 Resources</a>
+            </li>
+
+            <li><a href="bookmarks.html">🔖 Bookmarks</a></li>
+
+            <li>
+                <a href="search.html">
+                    🔍 Global Search
+                </a>
+            </li>
+
+            <li>
+                <a href="profile.html">
+                    👤 Profile
+                </a>
+            </li>
+
+            <li onclick="logout()">
+                🚪 Logout
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <h1>📄 Study Resources</h1>
+
+        <!-- Add Resource Form -->
+
+        <form id="resourceForm">
+
+            <input
+                type="text"
+                id="title"
+                placeholder="Resource Title"
+                required
+            >
+
+            <input
+                type="text"
+                id="subject"
+                placeholder="Subject"
+                required
+            >
+
+
+            <label>Resource Type</label>
+            
+            <select id="type">
+            
+                <option value="PDF">📄 PDF Notes</option>
+            
+                <option value="PPT">📊 PPT</option>
+            
+                <option value="VIDEO">🎥 Video Lecture</option>
+            
+                <option value="PYQ">📝 Previous Year Questions</option>
+            
+                <option value="LINK">🔗 Link</option>
+            
+                <option value="BOOK">📚 Book</option>
+            
+            </select>
+
+            <input
+                type="url"
+                id="url"
+                placeholder="Paste Resource Link (optional if uploading a file)"
+            >
+
+            <label for="fileUpload">Or upload a local file</label>
+
+            <input
+                type="file"
+                id="fileUpload"
+                accept=".pdf,.ppt,.pptx,.doc,.docx,.txt,.png,.jpg,.jpeg,.gif,.mp4,.webm,.mp3,.wav"
+            >
+
+            <p class="form-hint">
+                If there is no link, choose a local file. Small files are stored in your browser using localStorage.
+            </p>
+
+            <p id="fileName" class="file-name"></p>
+
+            <input
+                type="text"
+                id="tags"
+                placeholder="Tags (comma separated)"
+            >
+
+            <button type="submit">
+
+                Add Resource
+
+            </button>
+
+        </form>
+
+
+        <!-- Search -->
+
+        <input
+            type="text"
+            id="searchResource"
+            placeholder="Search resources..."
+        >
+
+        <div class="filter-buttons">
+        
+            <button onclick="setFilter('ALL')">
+                All
+            </button>
+        
+            <button onclick="setFilter('PDF')">
+                📄 PDF
+            </button>
+        
+            <button onclick="setFilter('PPT')">
+                📊 PPT
+            </button>
+        
+            <button onclick="setFilter('VIDEO')">
+                🎥 Video
+            </button>
+        
+            <button onclick="setFilter('PYQ')">
+                📝 PYQ
+            </button>
+        
+            <button onclick="setFilter('LINK')">
+                🔗 Link
+            </button>
+        
+            <button onclick="setFilter('BOOK')">
+                📚 Book
+            </button>
+        
+        </div>
+        <!-- Resources List -->
+
+        <div id="resourceList">
+
+        </div>
+
+    </main>
+
+    <script src="js/storage.js"></script>
+    <script src="js/resources.js"></script>
+    <script src="js/theme.js"></script>
+
+</body>
+</html>
