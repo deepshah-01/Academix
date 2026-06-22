@@ -98,9 +98,22 @@
             <input
                 type="url"
                 id="url"
-                placeholder="Paste Resource Link"
-                required
+                placeholder="Paste Resource Link (optional if uploading a file)"
             >
+
+            <label for="fileUpload">Or upload a local file</label>
+
+            <input
+                type="file"
+                id="fileUpload"
+                accept=".pdf,.ppt,.pptx,.doc,.docx,.txt,.png,.jpg,.jpeg,.gif,.mp4,.webm,.mp3,.wav"
+            >
+
+            <p class="form-hint">
+                If there is no link, choose a local file. Small files are stored in your browser using localStorage.
+            </p>
+
+            <p id="fileName" class="file-name"></p>
 
             <input
                 type="text"

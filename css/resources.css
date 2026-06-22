@@ -30,6 +30,23 @@
 
 }
 
+#resourceForm input[type="file"]{
+    background:white;
+    padding:10px;
+}
+
+.form-hint{
+    font-size:14px;
+    color:#64748b;
+    line-height:1.5;
+}
+
+.file-name{
+    font-size:14px;
+    color:#2563eb;
+    margin-top:-6px;
+}
+
 #resourceForm button{
 
     background:#3B82F6;
@@ -108,6 +125,11 @@
 
     color:#475569;
 
+}
+
+.resource-card .source-label{
+    color:#0f172a;
+    font-weight:600;
 }
 
 .tags{
