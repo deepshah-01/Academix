@@ -11,8 +11,9 @@
 body{
     display:flex;
     min-height:100vh;
-    background:#F4F8FF;
+    background:linear-gradient(180deg,#EEF5FF 0%, #F4F8FF 55%, #EDF6FF 100%);
     color:#0F172A;
+    overflow-x:hidden;
 }
 
 /* Sidebar */
@@ -20,9 +21,14 @@ body{
 .sidebar{
     width:260px;
     min-height:100vh;
+    height:100vh;
+    position:sticky;
+    top:0;
+    overflow-y:auto;
     background:#0F172A;
     color:white;
     padding:30px 20px;
+    flex-shrink:0;
 }
 
 /* Logo */
@@ -66,4 +72,26 @@ body{
     flex:1;
     padding:30px;
     color:#0F172A;
+    min-height:100vh;
+    background:linear-gradient(180deg,#EEF5FF 0%, #F4F8FF 55%, #EDF6FF 100%);
+    padding-bottom:48px;
+}
+
+@media (max-width:768px){
+    body{
+        display:flex;
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        min-height:auto;
+        height:auto;
+        position:relative;
+        top:auto;
+    }
+
+    .main-content{
+        flex:1;
+    }
 }

@@ -184,3 +184,41 @@
     }
 
 }
+
+body.dark .main-content h1{
+    color:#f8fafc;
+}
+
+body.dark .bookmark-card,
+body.dark .empty-state{
+    background:#1e293b;
+    border-color:#334155;
+    color:#e2e8f0;
+}
+
+body.dark .bookmark-card h2{
+    color:#f8fafc;
+}
+
+body.dark .bookmark-card p{
+    color:#cbd5e1;
+}
+
+body.dark .tags{
+    color:#93c5fd;
+}
+
+body.dark #searchBookmark,
+body.dark #sortBookmarks{
+    background:#0f172a;
+    color:#e2e8f0;
+    border:1px solid #475569;
+}
+
+body.dark .open-btn{
+    background:#2563eb;
+}
+
+body.dark .remove-btn{
+    background:#dc2626;
+}

@@ -39,7 +39,7 @@ body{
 
 /* Background Glow */
 
-body::before{
+body.home-page::before{
     content:"";
     position:absolute;
     width:500px;
@@ -52,7 +52,7 @@ body::before{
     z-index:-1;
 }
 
-body::after{
+body.home-page::after{
     content:"";
     position:absolute;
     width:450px;

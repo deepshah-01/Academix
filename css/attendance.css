@@ -1,100 +1,144 @@
 section h2{
-    padding : 15px;
-    color : #1E293B;
+    padding:15px;
+    color:#1E293B;
 }
 
 /* MAIN CONTAINER */
-.attendance-container {
+.attendance-container{
     margin-left:20px;
-    padding: 30px;
-    width: 100%;
+    padding:30px;
+    width:100%;
 }
 
-.page-header h1 {
-    margin-bottom: 20px;
-    margin-left: 30px;
-    color: rgb(8, 8, 8);
+.page-header h1{
+    margin-bottom:20px;
+    margin-left:30px;
+    color:#0F172A;
 }
 
 /* CARD */
-.attendance-card {
-    background: #1e293b;
-    padding: 25px;
-    border-radius: 12px;
-    width: 400px;
-    margin-top: 40px;
-    margin-left: 200px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.9);
+.attendance-card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    width:400px;
+    margin-top:40px;
+    margin-left:200px;
+    box-shadow:0 10px 20px rgba(15,23,42,0.12);
 }
 
-.attendance-card h2 {
-    margin-bottom: 20px;
-    color: #38bdf8;
+.attendance-card h2{
+    margin-bottom:20px;
+    color:#2563EB;
 }
 
 /* INPUT GROUP */
-.input-group {
-    margin-bottom: 15px;
+.input-group{
+    margin-bottom:15px;
 }
 
-.input-group label {
-    display: block;
-    margin-bottom: 6px;
-    color: #cbd5e1;
+.input-group label{
+    display:block;
+    margin-bottom:6px;
+    color:#334155;
 }
 
 .input-group input,
-.input-group select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    background: #0f172a;
-    color: #e2e8f0;
+.input-group select{
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #cbd5e1;
+    outline:none;
+    background:white;
+    color:#0f172a;
 }
 
 /* BUTTON */
-.calculate-btn {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 8px;
-    background: #38bdf8;
-    color: #0f172a;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
+.calculate-btn{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#38bdf8;
+    color:#0f172a;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
 }
 
-.calculate-btn:hover {
-    background: #0ea5e9;
-  
+.calculate-btn:hover{
+    background:#0ea5e9;
 }
 
 /* RESULT BOX */
-.result-box {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    background: #0f172a;
-    box-shadow: inset;
-    color: whitesmoke;
-     box-shadow:  0 0 10px rgba(255, 255, 255, 0.5);
+.result-box{
+    margin-top:20px;
+    padding:15px;
+    border-radius:10px;
+    background:#eff6ff;
+    color:#0f172a;
+    box-shadow:0 0 10px rgba(59,130,246,0.18);
 }
 
-.result-box p {
-    margin: 8px 0;
+.result-box p{
+    margin:8px 0;
+}
+
+/* DARK MODE */
+body.dark .page-header h1,
+body.dark section h2{
+    color:#f8fafc;
+}
+
+body.dark .attendance-card{
+    background:#1e293b;
+    box-shadow:0 10px 20px rgba(0,0,0,0.45);
+}
+
+body.dark .attendance-card h2{
+    color:#38bdf8;
+}
+
+body.dark .input-group label{
+    color:#cbd5e1;
+}
+
+body.dark .input-group input,
+body.dark .input-group select{
+    background:#0f172a;
+    color:#e2e8f0;
+    border:1px solid #475569;
+}
+
+body.dark .calculate-btn{
+    background:#38bdf8;
+    color:#0f172a;
+}
+
+body.dark .calculate-btn:hover{
+    background:#0ea5e9;
+}
+
+body.dark .result-box{
+    background:#0f172a;
+    color:#f8fafc;
+    box-shadow:0 0 10px rgba(56,189,248,0.28);
 }
 
 /* RESPONSIVE */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 200px;
+@media (max-width:768px){
+    .sidebar{
+        width:200px;
     }
 
-    .attendance-card {
-        width: 100%;
+    .attendance-card{
+        width:100%;
+        margin-left:0;
+    }
+
+    .attendance-container{
+        margin-left:0;
     }
 }
