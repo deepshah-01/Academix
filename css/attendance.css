@@ -1,0 +1,153 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,sans-serif;
+}
+
+body{
+    display:flex;
+    min-height:100vh;
+    background:#232D3F;/*#1B1A55;#003161;*/
+}
+
+/* Sidebar */
+
+.sidebar{
+    width:260px;
+    background:#0F172A;
+    color:white;
+    padding:30px 20px;
+}
+
+.logo{
+    margin-bottom:40px;
+    color:#3B82F6;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li a{
+    color : white;
+    text-decoration : none;
+    display: block; 
+    width: 100%;
+}
+
+.sidebar li{
+
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.sidebar li:hover,
+.sidebar .active{
+    background:#1E293B;
+}
+
+section h2{
+    padding : 15px;
+    color : #1E293B;
+}
+
+
+/* MAIN CONTAINER */
+.attendance-container {
+    margin-left:20px;
+    padding: 30px;
+    width: 100%;
+}
+
+.page-header h1 {
+    margin-bottom: 20px;
+    margin-left: 30px;
+    color: whitesmoke;
+}
+
+/* CARD */
+.attendance-card {
+    background: #1e293b;
+    padding: 25px;
+    border-radius: 12px;
+    width: 400px;
+    margin-top: 40px;
+    margin-left: 200px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.9);
+}
+
+.attendance-card h2 {
+    margin-bottom: 20px;
+    color: #38bdf8;
+}
+
+/* INPUT GROUP */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #cbd5e1;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+/* BUTTON */
+.calculate-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #38bdf8;
+    color: #0f172a;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.calculate-btn:hover {
+    background: #0ea5e9;
+  
+}
+
+/* RESULT BOX */
+.result-box {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #0f172a;
+    box-shadow: inset;
+    color: whitesmoke;
+     box-shadow:  0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.result-box p {
+    margin: 8px 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .attendance-card {
+        width: 100%;
+    }
+}
