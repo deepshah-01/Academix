@@ -43,6 +43,21 @@ function renderStatistics() {
     const resources =
         getData("resources");
 
+    const pinnedNotes =
+        notes.filter(
+            note => note.pinned
+        );
+
+    const bookmarkedNotes =
+        notes.filter(
+            note => note.bookmarked
+        );
+
+    const bookmarkedResources =
+        resources.filter(
+            resource => resource.bookmarked
+        );
+
     const notesBookmarks =
         notes.filter(
             note => note.bookmarked
@@ -57,6 +72,21 @@ function renderStatistics() {
         "notesCount"
     ).innerText =
         notes.length + " Files";
+
+    document.getElementById(
+        "pinnedNotesCount"
+    ).innerText =
+        pinnedNotes.length;
+
+    document.getElementById(
+        "bookmarkedNotesCount"
+    ).innerText =
+        bookmarkedNotes.length;
+
+    document.getElementById(
+        "bookmarkedResourcesCount"
+    ).innerText =
+        bookmarkedResources.length;
 
     document.getElementById(
         "resourcesCount"

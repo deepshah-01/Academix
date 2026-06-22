@@ -1,127 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academix Dashboard</title>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Academix Dashboard</title>
 
-    <link rel="stylesheet" href="css/dashboard.css">
-</head>
-<body>
+        <link rel="stylesheet" href="css/dashboard.css">
+    </head>
+    <body>
 
-    <!-- Sidebar -->
+        <!-- Sidebar -->
 
-    <aside class="sidebar">
+        <aside class="sidebar">
 
-        <h2 class="logo">Academix</h2>
+            <h2 class="logo">Academix</h2>
 
-        <ul>
-        
-            <li class="active">
-                <a href="dashboard.html">
-                    🏠 Dashboard
-                </a>
-            </li>
-        
-            <li>
-                <a href="attendance.html">
-                    📊 Attendance
-                </a>
-            </li>
-        
-            <li>
-                <a href="notes.html">
-                    📚 Notes
-                </a>
-            </li>
-        
-            <li>
-                <a href="resources.html">
-                    📄 Resources
-                </a>
-            </li>
-        
-            <li>
-                <a href="bookmarks.html">
-                    🔖 Bookmarks
-                </a>
-            </li>
-        
-            <li>
-                <a href="profile.html">
-                    👤 Profile
-                </a>
-            </li>
-        
-            <li onclick="logout()">
-                🚪 Logout
-            </li>
-        
-        </ul>
+            <ul>
+            
+                <li class="active">
+                    <a href="dashboard.html">
+                        🏠 Dashboard
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="attendance.html">
+                        📊 Attendance
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="notes.html">
+                        📚 Notes
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="resources.html">
+                        📄 Resources
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="bookmarks.html">
+                        🔖 Bookmarks
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="profile.html">
+                        👤 Profile
+                    </a>
+                </li>
+            
+                <li onclick="logout()">
+                    🚪 Logout
+                </li>
+            
+            </ul>
 
-    </aside>
+        </aside>
 
-    <!-- Main -->
+        <!-- Main -->
 
-    <main class="main-content">
+        <main class="main-content">
 
-        <div class="top-bar">
-            <h1 id="welcome">Welcome</h1>
-        </div>
-
-        <div class="cards">
-
-            <div class="card">
-                <h3>Attendance</h3>
-                <p>85%</p>
+            <div class="top-bar">
+                <h1 id="welcome">Welcome</h1>
             </div>
 
-            <div class="card">
-                <h3>Notes</h3>
-                <p id="notesCount">0 Files</p>
+            <div class="cards">
+            
+                <div class="card">
+                    <h3>📚 Total Notes</h3>
+                    <p id="notesCount">0</p>
+                </div>
+            
+                <div class="card">
+                    <h3>📌 Pinned Notes</h3>
+                    <p id="pinnedNotesCount">0</p>
+                </div>
+            
+                <div class="card">
+                    <h3>🔖 Bookmarked Notes</h3>
+                    <p id="bookmarkedNotesCount">0</p>
+                </div>
+            
+                <div class="card">
+                    <h3>📄 Resources</h3>
+                    <p id="resourcesCount">0</p>
+                </div>
+            
+                <div class="card">
+                    <h3>⭐ Bookmarked Resources</h3>
+                    <p id="bookmarkedResourcesCount">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>🔖 Total Bookmarks</h3>
+                    <p id="bookmarksCount">0</p>
+                </div>
+            
             </div>
 
-            <div class="card">
-                <h3>Resources</h3>
-                <p id="resourcesCount">0 Links</p>
-            </div>
+            <div class="overview">
 
-            <div class="card">
-                <h3>Bookmarks</h3>
-                <p id="bookmarksCount">0 Saved</p>
-            </div>
+                <div class="big-card">
+                    <h2>Today's Overview</h2>
 
-        </div>
+                    <p>
+                        Welcome to Academix. Manage your notes,
+                        attendance, resources and bookmarks from one place.
+                    </p>
 
-        <div class="overview">
-
-            <div class="big-card">
-                <h2>Today's Overview</h2>
-
-                <p>
-                    Welcome to Academix. Manage your notes,
-                    attendance, resources and bookmarks from one place.
-                </p>
+                </div>
 
             </div>
-
-        </div>
-        
-        <div class="activity-card">
-        
-            <h2>Recent Activity</h2>
-        
-            <div id="activityList">
-        
+            
+            <div class="activity-card">
+            
+                <h2>Recent Activity</h2>
+            
+                <div id="activityList">
+            
+                </div>
+            
             </div>
-        
-        </div>
 
-    </main>
+        </main>
 
-    <script src="js/storage.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/dashboard.js"></script>
+        <script src="js/storage.js"></script>
+        <script src="js/auth.js"></script>
+        <script src="js/dashboard.js"></script>
 
-</body>
-</html>
+    </body>
+    </html>
