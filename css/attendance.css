@@ -1,60 +1,7 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Inter,sans-serif;
-}
-
-body{
-    display:flex;
-    min-height:100vh;
-    background:#232D3F;/*#1B1A55;#003161;*/
-}
-
-/* Sidebar */
-
-.sidebar{
-    width:260px;
-    background:#0F172A;
-    color:white;
-    padding:30px 20px;
-}
-
-.logo{
-    margin-bottom:40px;
-    color:#3B82F6;
-}
-
-.sidebar ul{
-    list-style:none;
-}
-
-.sidebar li a{
-    color : white;
-    text-decoration : none;
-    display: block; 
-    width: 100%;
-}
-
-.sidebar li{
-
-    padding:15px;
-    margin-bottom:10px;
-    border-radius:10px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.sidebar li:hover,
-.sidebar .active{
-    background:#1E293B;
-}
-
 section h2{
     padding : 15px;
     color : #1E293B;
 }
-
 
 /* MAIN CONTAINER */
 .attendance-container {
@@ -66,7 +13,7 @@ section h2{
 .page-header h1 {
     margin-bottom: 20px;
     margin-left: 30px;
-    color: whitesmoke;
+    color: rgb(8, 8, 8);
 }
 
 /* CARD */

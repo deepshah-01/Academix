@@ -407,3 +407,40 @@ body::after{
     font-size:1.1rem;
     line-height:1.8;
 }
+
+body.dark{
+    background:#0f172a;
+    color:white;
+}
+
+body.dark .main-content{
+    background:#111827;
+    color:white;
+}
+
+body.dark .card,
+body.dark .profile-card,
+body.dark .stat-card,
+body.dark .search-card,
+body.dark .resource-card,
+body.dark .bookmark-card,
+body.dark .note-editor,
+body.dark .notes-sidebar,
+body.dark .big-card,
+body.dark .activity-card{
+    background:#1e293b;
+    color:white;
+    border-color:#334155;
+}
+
+body.dark input,
+body.dark textarea,
+body.dark select{
+    background:#0f172a;
+    color:white;
+    border:1px solid #475569;
+}
+
+body.dark p{
+    color:#cbd5e1;
+}

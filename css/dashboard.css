@@ -1,76 +1,3 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Inter,sans-serif;
-}
-
-body{
-    display:flex;
-    min-height:100vh;
-
-    background:#F4F8FF;
-}
-
-/* Sidebar */
-
-.sidebar{
-
-    width:260px;
-
-    background:#0F172A;
-
-    color:white;
-
-    padding:30px 20px;
-}
-
-.logo{
-    margin-bottom:40px;
-
-    color:#3B82F6;
-}
-
-.sidebar ul{
-    list-style:none;
-}
-
-.sidebar li{
-
-    padding:15px;
-
-    margin-bottom:10px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-/* .sidebar ul li a{
-
-    color: white;
-
-    text-decoration: none;
-
-    display: block;
-
-} */
-
-.sidebar li:hover,
-.sidebar .active{
-    background:#1E293B;
-}
-
-/* Main */
-
-.main-content{
-    flex:1;
-
-    padding:30px;
-}
-
 .top-bar{
     margin-bottom:30px;
 }
@@ -92,6 +19,7 @@ body{
 }
 
 .card{
+    position:static;
 
     background:white;
 
@@ -105,6 +33,7 @@ body{
 
 .card h3{
     margin-bottom:10px;
+    color:#0F172A;
 }
 
 .card p{
@@ -126,6 +55,11 @@ body{
 
     box-shadow:
     0 4px 12px rgba(0,0,0,.08);
+}
+
+.big-card h2,
+.big-card p{
+    color:#0F172A;
 }
 
 .activity-card{

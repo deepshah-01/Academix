@@ -1,55 +1,11 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
-body{
-    display:flex;
-    background:#f4f6f9;
-}
-
-.sidebar{
-    width:230px;
-    min-height:100vh;
-    background:#1e293b;
-    color:white;
-    padding:20px;
-}
-
-.logo{
-    margin-bottom:30px;
-}
-
-.sidebar ul{
-    list-style:none;
-}
-
-.sidebar li{
-    padding:14px;
-    border-radius:10px;
-    margin-bottom:10px;
-    cursor:pointer;
-}
-
-.sidebar li.active,
-.sidebar li:hover{
-    background:#334155;
-}
-
-.sidebar a{
-    color:white;
-    text-decoration:none;
-}
-
-.main-content{
-    flex:1;
-    padding:30px;
-}
-
 .profile-container{
     margin-top:30px;
+}
+
+.main-content h1,
+.profile-card h2,
+.stat-card h3{
+    color:#0F172A;
 }
 
 .profile-card{
