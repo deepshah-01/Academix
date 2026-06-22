@@ -1,245 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Inter,sans-serif;
+    font-family:'Inter',sans-serif;
 }
 
 body{
     min-height:100vh;
-
-    background:#071126;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
+    background:
+        radial-gradient(circle at top left, rgba(37,99,235,.28), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(16,185,129,.20), transparent 28%),
+        #071126;
     color:white;
 }
 
-.container{
-    width:90%;
-    max-width:1200px;
-
+.auth-shell{
+    min-height:100vh;
     display:grid;
-    grid-template-columns:1fr 1fr;
-
-    background:#0F1F3D;
-
-    border-radius:25px;
-
-    overflow:hidden;
+    grid-template-columns:1fr 1.05fr;
+    gap:0;
 }
 
-.left-panel{
-    padding:60px;
-
-    background:linear-gradient(
-        135deg,
-        #2563EB,
-        #10B981
-    );
-
+.auth-hero{
+    padding:64px;
     display:flex;
     flex-direction:column;
     justify-content:center;
+    gap:24px;
+    background:linear-gradient(135deg, rgba(37,99,235,.92), rgba(16,185,129,.88));
+    color:white;
 }
 
-.left-panel h1{
+.brand{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    width:max-content;
+    padding:10px 16px;
+    border-radius:999px;
+    background:rgba(255,255,255,.14);
+    font-weight:700;
+    letter-spacing:.3px;
+}
+
+.auth-hero h1{
     font-size:3rem;
-    margin-bottom:20px;
+    line-height:1.05;
+    max-width:12ch;
 }
 
-.left-panel h2{
-    font-size:2rem;
-    margin-bottom:20px;
-}
-
-.left-panel p{
+.auth-hero p{
+    max-width:34rem;
+    font-size:1.05rem;
     line-height:1.8;
+    color:rgba(255,255,255,.92);
 }
 
-.right-panel{
-    padding:50px;
+.auth-highlights{
+    list-style:none;
+    display:grid;
+    gap:12px;
+}
 
+.auth-highlights li{
+    padding:14px 16px;
+    border-radius:14px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.14);
+    backdrop-filter:blur(8px);
+}
+
+.auth-panel{
+    padding:48px;
     display:flex;
     align-items:center;
+    justify-content:center;
 }
 
-.form-box{
+.auth-card{
     width:100%;
+    max-width:520px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:28px;
+    padding:40px;
+    box-shadow:0 24px 60px rgba(0,0,0,.28);
+    backdrop-filter:blur(16px);
 }
 
-.form-box h2{
-    margin-bottom:25px;
+.auth-card h2{
+    font-size:2rem;
+    margin-bottom:8px;
 }
 
-input,
-select{
+.auth-card .subtitle{
+    color:#cbd5e1;
+    margin-bottom:28px;
+    line-height:1.6;
+}
+
+.auth-form{
+    display:grid;
+    gap:14px;
+}
+
+.field{
+    display:grid;
+    gap:8px;
+}
+
+.field span{
+    font-size:.95rem;
+    font-weight:600;
+    color:#e2e8f0;
+}
+
+.auth-form input,
+.auth-form select{
     width:100%;
-
-    padding:15px;
-    margin-bottom:15px;
-
+    padding:15px 16px;
     border:none;
     outline:none;
-
-    border-radius:12px;
-
+    border-radius:14px;
     background:#15274B;
-
     color:white;
-}
-
-button{
-    width:100%;
-
-    padding:15px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:linear-gradient(
-        135deg,
-        #2563EB,
-        #10B981
-    );
-
-    color:white;
-
     font-size:1rem;
-    font-weight:600;
+    border:1px solid transparent;
+    transition:border-color .2s ease, transform .2s ease, background .2s ease;
+}
 
+.auth-form input::placeholder{
+    color:#94a3b8;
+}
+
+.auth-form input:focus,
+.auth-form select:focus{
+    border-color:#10b981;
+    background:#13213d;
+}
+
+.auth-form button{
+    margin-top:6px;
+    width:100%;
+    padding:15px 18px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg, #2563EB, #10B981);
+    color:white;
+    font-size:1rem;
+    font-weight:700;
     cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease;
 }
 
-.login-link{
+.auth-form button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 14px 30px rgba(37,99,235,.28);
+}
+
+.auth-link{
     text-align:center;
-    margin-top:20px;
+    margin-top:18px;
+    color:#cbd5e1;
 }
 
-.login-link a{
+.auth-link a{
     color:#10B981;
     text-decoration:none;
+    font-weight:700;
 }
 
-@media(max-width:768px){
+.hint{
+    margin-top:-4px;
+    color:#94a3b8;
+    font-size:.88rem;
+    line-height:1.5;
+}
 
-    .container{
+@media (max-width: 900px){
+    .auth-shell{
         grid-template-columns:1fr;
     }
 
-    .left-panel{
-        display:none;
+    .auth-hero{
+        padding:40px 24px 24px;
     }
-}
 
-.auth-container{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-}
+    .auth-hero h1{
+        font-size:2.4rem;
+        max-width:none;
+    }
 
-.login-card{
-
-    width:100%;
-    max-width:450px;
-
-    background:rgba(255,255,255,.05);
-
-    backdrop-filter:blur(15px);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:25px;
-
-    padding:45px;
-    text-align:center;
-
-    box-shadow:0 20px 50px rgba(0,0,0,.3);
-}
-
-.logo{
-    font-size:3rem;
-    font-weight:800;
-    margin-bottom:10px;
-
-    background:linear-gradient(
-        90deg,
-        #2563EB,
-        #10B981
-    );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-.subtitle{
-    color:#10B981;
-    font-weight:600;
-    margin-bottom:20px;
-}
-
-.login-card h2{
-    margin-bottom:30px;
-    color:white;
-}
-
-.login-card input{
-
-    width:100%;
-    padding:15px;
-
-    margin-bottom:15px;
-
-    border:none;
-    outline:none;
-
-    border-radius:12px;
-
-    background:#15274B;
-
-    color:white;
-}
-
-.login-card button{
-
-    width:100%;
-    padding:15px;
-
-    border:none;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    color:white;
-    font-size:1rem;
-    font-weight:600;
-
-    background:linear-gradient(
-        135deg,
-        #2563EB,
-        #10B981
-    );
-
-    transition:.3s;
-}
-
-.login-card button:hover{
-    transform:translateY(-3px);
-}
-
-.signup-link{
-    margin-top:20px;
-    color:#DCE7FF;
-}
-
-.signup-link a{
-    color:#10B981;
-    text-decoration:none;
-    font-weight:600;
+    .auth-panel{
+        padding:24px;
+    }
 }

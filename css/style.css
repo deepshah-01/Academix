@@ -108,7 +108,10 @@ body::after{
     color:var(--secondary);
 }
 
-.signup-btn{
+.signup-btn,
+.login-btn,
+.signup-btn:visited,
+.login-btn:visited{
     text-decoration:none;
     color:white;
 
@@ -125,7 +128,18 @@ body::after{
     transition:.3s;
 }
 
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
 .signup-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 30px rgba(37,99,235,.35);
+}
+
+.login-btn:hover{
     transform:translateY(-3px);
     box-shadow:0 10px 30px rgba(37,99,235,.35);
 }
@@ -331,6 +345,15 @@ body::after{
         display:none;
     }
 
+    .nav-actions{
+        gap:8px;
+    }
+
+    .login-btn,
+    .signup-btn{
+        padding:10px 16px;
+    }
+
     .hero h1{
         font-size:3rem;
     }
@@ -443,4 +466,123 @@ body.dark select{
 
 body.dark p{
     color:#cbd5e1;
+}
+
+body.dark .sidebar{
+    background:#0f172a;
+    color:#e2e8f0;
+}
+
+body.dark .sidebar .logo{
+    color:#60a5fa;
+}
+
+body.dark .sidebar li:hover,
+body.dark .sidebar li.active{
+    background:#1e293b;
+}
+
+body.dark .sidebar li a{
+    color:#f8fafc;
+}
+
+body.dark .main-content h1,
+body.dark .main-content h2,
+body.dark .main-content h3,
+body.dark .main-content h4,
+body.dark .main-content h5,
+body.dark .main-content h6,
+body.dark .main-content label{
+    color:#f8fafc;
+}
+
+body.dark .main-content p,
+body.dark .main-content li,
+body.dark .main-content span,
+body.dark .main-content a,
+body.dark .main-content .note-title,
+body.dark .main-content .note-excerpt,
+body.dark .main-content .activity-item,
+body.dark .main-content .bookmark-card p,
+body.dark .main-content .resource-card p,
+body.dark .main-content .search-card p,
+body.dark .main-content .stat-card p,
+body.dark .main-content .card,
+body.dark .main-content .form-hint,
+body.dark .main-content .file-name{
+    color:#cbd5e1;
+}
+
+body.dark .main-content .card p,
+body.dark .main-content .profile-card p,
+body.dark .main-content .stat-card p,
+body.dark .main-content .resource-card p,
+body.dark .main-content .bookmark-card p,
+body.dark .main-content .search-card p,
+body.dark .main-content .activity-item,
+body.dark .main-content .note-excerpt,
+body.dark .main-content .note-item{
+    color:#e2e8f0;
+}
+
+body.dark .main-content .card h3,
+body.dark .main-content .big-card h2,
+body.dark .main-content .profile-card h2,
+body.dark .main-content .stat-card h3,
+body.dark .main-content .resource-card h2,
+body.dark .main-content .bookmark-card h2,
+body.dark .main-content .search-card h2,
+body.dark .main-content .activity-card h2,
+body.dark .main-content .note-editor h2{
+    color:#f8fafc;
+}
+
+body.dark .main-content .tags,
+body.dark .main-content .activity-time{
+    color:#93c5fd;
+}
+
+body.dark .main-content .resource-card .source-label{
+    color:#bfdbfe;
+}
+
+body.dark .main-content .page-header h1,
+body.dark .main-content .attendance-card h2,
+body.dark .main-content .attendance-card p,
+body.dark .main-content .input-group label,
+body.dark .main-content .result-box,
+body.dark .main-content .note-item .note-title,
+body.dark .main-content .editor-header input[type="text"],
+body.dark .main-content .editor-content,
+body.dark .main-content .notes-sidebar h3,
+body.dark .main-content .note-editor h3,
+body.dark .main-content .bookmark-controls,
+body.dark .main-content .filter-buttons{
+    color:#e2e8f0;
+}
+
+body.dark .main-content .note-item{
+    background:#0f172a;
+    border-color:#334155;
+}
+
+body.dark .main-content .result-box{
+    background:#0f172a;
+    box-shadow:0 0 10px rgba(148,163,184,.25);
+}
+
+body.dark .main-content #resourceForm,
+body.dark .main-content .profile-card,
+body.dark .main-content .stat-card,
+body.dark .main-content .resource-card,
+body.dark .main-content .bookmark-card,
+body.dark .main-content .search-card,
+body.dark .main-content .notes-sidebar,
+body.dark .main-content .note-editor,
+body.dark .main-content .big-card,
+body.dark .main-content .activity-card,
+body.dark .main-content .empty-state{
+    background:#1e293b;
+    color:#e2e8f0;
+    border-color:#334155;
 }
