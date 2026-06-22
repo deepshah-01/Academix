@@ -221,7 +221,7 @@ function selectNote(id) {
     if (!note) return;
 
     noteState.selectedId = id;
-    noteState.mode = 'preview';
+    noteState.mode = 'edit';
     noteState.active = true;
 
     noteTitle.value = note.title;
@@ -367,7 +367,37 @@ function initNotes() {
     renderNotes();
 }
 
-window.addEventListener('DOMContentLoaded', initNotes);
+window.addEventListener(
+
+    "DOMContentLoaded",
+
+    () => {
+
+        initNotes();
+
+        const selectedId =
+
+            localStorage.getItem(
+
+                "selectedNoteId"
+
+            );
+
+        if (selectedId) {
+
+            selectNote(selectedId);
+
+            localStorage.removeItem(
+
+                "selectedNoteId"
+
+            );
+
+        }
+
+    }
+
+);
 
 
 const imageToggle = document.getElementById("imageToggle");

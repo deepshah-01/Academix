@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     renderActivity();
+    renderStatistics();
 
 });
 
@@ -33,6 +34,42 @@ localStorage.getItem(
 )
 
 ) || [];
+
+function renderStatistics() {
+
+    const notes =
+        getData("academix_notes");
+
+    const resources =
+        getData("resources");
+
+    const notesBookmarks =
+        notes.filter(
+            note => note.bookmarked
+        ).length;
+
+    const resourceBookmarks =
+        resources.filter(
+            resource => resource.bookmarked
+        ).length;
+
+    document.getElementById(
+        "notesCount"
+    ).innerText =
+        notes.length + " Files";
+
+    document.getElementById(
+        "resourcesCount"
+    ).innerText =
+        resources.length + " Links";
+
+    document.getElementById(
+        "bookmarksCount"
+    ).innerText =
+        (notesBookmarks + resourceBookmarks)
+        + " Saved";
+
+}
 
 
 function renderActivity(){

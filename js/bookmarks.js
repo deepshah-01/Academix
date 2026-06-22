@@ -2,6 +2,7 @@
 protectPage();
 
 let bookmarkFilter = "ALL";
+let sortOrder = "NEWEST";
 
 const bookmarkList =
     document.getElementById(
@@ -21,6 +22,14 @@ searchBookmark.addEventListener(
 function setBookmarkFilter(type){
 
     bookmarkFilter = type;
+
+    renderBookmarks();
+
+}
+
+function setSortOrder(order) {
+
+    sortOrder = order;
 
     renderBookmarks();
 
@@ -139,7 +148,39 @@ function openResource(url){
 
 }
 
-function renderBookmarks(){
+function editNote(id){
+
+    localStorage.setItem(
+
+        "selectedNoteId",
+
+        id
+
+    );
+
+    window.location.href =
+
+        "notes.html";
+
+}
+
+function openNote(id) {
+
+    localStorage.setItem(
+
+        "selectedNoteId",
+
+        id
+
+    );
+
+    window.location.href =
+
+        "notes.html";
+
+}
+
+function    renderBookmarks(){
 
     bookmarkList.innerHTML = "";
 
@@ -172,6 +213,39 @@ function renderBookmarks(){
                 .includes(query)
 
     );
+
+    if (sortOrder === "NEWEST") {
+
+        bookmarks.sort(
+
+            (a, b) =>
+
+                new Date(b.createdAt)
+
+                -
+
+                new Date(a.createdAt)
+
+        );
+
+    }
+
+    else {
+
+        bookmarks.sort(
+
+            (a, b) =>
+
+                new Date(a.createdAt)
+
+                -
+
+                new Date(b.createdAt)
+
+        );
+
+    }
+    
 
     if(bookmarkFilter === "NOTES"){
 
@@ -276,8 +350,35 @@ function renderBookmarks(){
 
                     :
 
-                    ""
-                }
+                    `
+                    <button
+                        class="open-btn"
+                        onclick="openNote('${item.id}')"
+                    >
+                        Open
+                    </button>
+                    `
+                    }
+
+                    ${
+                        item.source === "NOTE"
+                        
+                        ?
+                        
+                        `
+                        
+                        <button
+                            class="edit-btn"
+                            onclick="editNote('${item.id}')"
+                        >
+                            Edit
+                        </button>
+                        `
+
+                        :
+
+                        ""
+                    }
 
                 <button
                     class="remove-btn"

@@ -63,11 +63,23 @@
 
         <!-- Search -->
 
-        <input
-            type="text"
-            id="searchBookmark"
-            placeholder="Search bookmarks..."
-        >
+        <div class="bookmark-controls">
+        
+            <input type="text" id="searchBookmark" placeholder="Search bookmarks...">
+        
+            <select id="sortBookmarks" onchange="setSortOrder(this.value)">
+        
+                <option value="NEWEST">
+                    Newest First
+                </option>
+        
+                <option value="OLDEST">
+                    Oldest First
+                </option>
+        
+            </select>
+        
+        </div>
 
         <!-- Filter Buttons -->
 
