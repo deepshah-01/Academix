@@ -1,0 +1,165 @@
+@media (max-width: 768px){
+    body{
+        display:flex;
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        min-height:auto;
+        height:auto;
+        position:relative;
+        top:auto;
+        padding:18px 16px;
+    }
+
+    .sidebar ul{
+        display:flex;
+        flex-wrap:wrap;
+        gap:8px;
+    }
+
+    .sidebar li{
+        margin-bottom:0;
+        padding:10px 12px;
+        flex:1 1 calc(50% - 8px);
+        min-width:140px;
+    }
+
+    .sidebar li a{
+        font-size:14px;
+    }
+
+    .main-content{
+        width:100%;
+        margin-left:0;
+        padding:20px 16px 36px;
+        min-height:auto;
+    }
+
+    .top-bar,
+    .profile-container,
+    .attendance-container{
+        margin-left:0;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    #resourceList,
+    #bookmarkList,
+    #searchResults{
+        grid-template-columns:1fr;
+    }
+
+    .resource-buttons,
+    .bookmark-buttons,
+    .filter-buttons,
+    .hero-buttons,
+    .nav-actions{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .resource-buttons button,
+    .bookmark-buttons button,
+    .filter-buttons button,
+    .hero-buttons a,
+    .nav-actions a{
+        width:100%;
+    }
+
+    .notes-layout{
+        flex-direction:column;
+        height:auto;
+    }
+
+    .notes-sidebar{
+        width:100%;
+        max-height:none;
+    }
+
+    .note-editor{
+        width:100%;
+        min-height:420px;
+    }
+
+    .attendance-card{
+        width:100%;
+        margin-left:0;
+    }
+
+    .attendance-container{
+        padding:20px 0;
+    }
+
+    .page-header h1{
+        margin-left:0;
+    }
+
+    .floating-container{
+        width:100%;
+        height:auto;
+    }
+
+    .card{
+        position:relative;
+        left:auto;
+        right:auto;
+        top:auto;
+        bottom:auto;
+        margin:14px 0;
+        width:100%;
+        text-align:center;
+    }
+}
+
+@media (max-width: 480px){
+    .sidebar li{
+        flex-basis:100%;
+    }
+
+    .main-content{
+        padding:16px 12px 32px;
+    }
+
+    .card,
+    .big-card,
+    .activity-card,
+    .profile-card,
+    .stat-card,
+    .resource-card,
+    .bookmark-card,
+    .search-card,
+    .empty-state,
+    #resourceForm{
+        padding:16px;
+    }
+
+    .attendance-card{
+        padding:18px;
+    }
+
+    .hero h1{
+        font-size:2.4rem;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .nav-actions{
+        gap:8px;
+    }
+
+    .login-btn,
+    .signup-btn{
+        padding:10px 14px;
+        font-size:14px;
+    }
+}
