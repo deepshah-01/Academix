@@ -682,3 +682,104 @@ body.dark .main-content .empty-state{
     position:relative;
     z-index:1;
 }
+
+@media(max-width:640px){
+    .home-page .navbar{
+        padding:14px 16px;
+        gap:12px;
+    }
+
+    .home-page .logo{
+        font-size:1.45rem;
+    }
+
+    .home-page .nav-actions{
+        flex-direction:row;
+        gap:8px;
+    }
+
+    .home-page .login-btn,
+    .home-page .signup-btn{
+        padding:9px 12px;
+        border-radius:11px;
+        font-size:.86rem;
+    }
+
+    .home-page .hero{
+        min-height:auto;
+        padding:118px 16px 58px;
+    }
+
+    .home-page .badge{
+        padding:10px 14px;
+        font-size:.86rem;
+    }
+
+    .home-page .hero h1{
+        font-size:clamp(2.4rem,13vw,3.4rem);
+        letter-spacing:-.07em;
+    }
+
+    .home-page .hero p{
+        font-size:1rem;
+        line-height:1.7;
+    }
+
+    .home-page .hero-buttons{
+        width:100%;
+        gap:12px;
+    }
+
+    .home-page .primary-btn,
+    .home-page .secondary-btn{
+        width:100%;
+        max-width:320px;
+        padding:14px 18px;
+    }
+
+    .home-page .floating-container{
+        margin-top:44px;
+        width:100%;
+    }
+
+    .home-page .floating-container .card{
+        width:100%;
+        max-width:320px;
+        text-align:center;
+    }
+
+    .features,
+    .about{
+        padding:70px 16px;
+    }
+
+    .features h2,
+    .about h2{
+        font-size:clamp(2rem,10vw,2.6rem);
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:380px){
+    .home-page .navbar{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .home-page .nav-actions{
+        width:100%;
+    }
+
+    .home-page .login-btn,
+    .home-page .signup-btn{
+        flex:1;
+        text-align:center;
+    }
+
+    .home-page .hero{
+        padding-top:150px;
+    }
+}

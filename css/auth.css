@@ -276,3 +276,90 @@ body{
         padding:24px;
     }
 }
+
+@media (max-width: 640px){
+    body{
+        overflow-x:hidden;
+    }
+
+    .auth-shell{
+        min-height:100svh;
+    }
+
+    .auth-hero{
+        padding:32px 18px 24px;
+        gap:16px;
+    }
+
+    .brand{
+        padding:8px 13px;
+        font-size:.9rem;
+    }
+
+    .auth-hero h1{
+        font-size:clamp(2rem,11vw,2.7rem);
+        max-width:none;
+    }
+
+    .auth-hero p{
+        font-size:.98rem;
+        line-height:1.65;
+    }
+
+    .auth-highlights{
+        gap:9px;
+    }
+
+    .auth-highlights li{
+        padding:12px 13px;
+        font-size:.92rem;
+    }
+
+    .auth-panel{
+        padding:18px;
+    }
+
+    .auth-card{
+        padding:24px;
+        border-radius:24px;
+    }
+
+    .auth-card h2{
+        font-size:1.7rem;
+    }
+
+    .auth-form{
+        gap:12px;
+    }
+
+    .auth-form input,
+    .auth-form select,
+    .auth-form button{
+        min-height:48px;
+        padding:13px 14px;
+        font-size:16px;
+        border-radius:14px;
+    }
+
+    .app-toast{
+        left:16px;
+        right:16px;
+        top:16px;
+        max-width:none;
+    }
+}
+
+@media (max-width: 380px){
+    .auth-hero{
+        padding:26px 14px 20px;
+    }
+
+    .auth-panel{
+        padding:14px;
+    }
+
+    .auth-card{
+        padding:20px;
+        border-radius:20px;
+    }
+}
