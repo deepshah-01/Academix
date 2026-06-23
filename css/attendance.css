@@ -1,104 +1,148 @@
-section h2{
-    padding:15px;
-    color:#1E293B;
-}
-
-/* MAIN CONTAINER */
 .attendance-container{
-    margin-left:20px;
-    padding:30px;
-    width:100%;
+    display:flex;
+    flex-direction:column;
 }
 
-.page-header h1{
-    margin-bottom:20px;
-    margin-left:30px;
-    color:#0F172A;
+.page-header{
+    max-width:1100px;
 }
 
-/* CARD */
+.page-header h1::after{
+    content:"Plan your safe bunk margin with instant visual feedback.";
+    display:block;
+    max-width:620px;
+    margin-top:12px;
+    color:#64748b;
+    font-size:1rem;
+    font-weight:600;
+    letter-spacing:0;
+    line-height:1.7;
+}
+
 .attendance-card{
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    width:400px;
-    margin-top:40px;
-    margin-left:200px;
-    box-shadow:0 10px 20px rgba(15,23,42,0.12);
+    width:min(100%,520px);
+    margin:18px auto 0;
+    position:relative;
+    overflow:hidden;
+    padding:30px;
+    border-radius:30px;
+    border:1px solid rgba(148,163,184,.28);
+    background:
+        radial-gradient(circle at 20% 0%, rgba(37,99,235,.16), transparent 35%),
+        rgba(255,255,255,.82);
+    box-shadow:0 24px 70px rgba(15,23,42,.12);
+    backdrop-filter:blur(18px);
+    transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+
+.attendance-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    border:1px solid rgba(255,255,255,.68);
+    pointer-events:none;
+}
+
+.attendance-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(37,99,235,.32);
+    box-shadow:0 30px 76px rgba(15,23,42,.16);
 }
 
 .attendance-card h2{
-    margin-bottom:20px;
-    color:#2563EB;
+    color:#0f172a;
+    margin-bottom:24px;
+    font-size:1.8rem;
+    letter-spacing:-.04em;
 }
 
-/* INPUT GROUP */
+.attendance-card h2::before{
+    content:"Precision Mode";
+    display:block;
+    width:max-content;
+    margin-bottom:10px;
+    padding:7px 11px;
+    color:#2563eb;
+    background:rgba(37,99,235,.1);
+    border:1px solid rgba(37,99,235,.14);
+    border-radius:999px;
+    font-size:.72rem;
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+
 .input-group{
-    margin-bottom:15px;
+    margin-bottom:16px;
 }
 
 .input-group label{
     display:block;
-    margin-bottom:6px;
+    margin-bottom:8px;
     color:#334155;
+    font-weight:800;
 }
 
 .input-group input,
 .input-group select{
     width:100%;
-    padding:10px;
-    border-radius:8px;
-    border:1px solid #cbd5e1;
+    padding:14px 15px;
+    border-radius:16px;
+    border:1px solid rgba(148,163,184,.36);
     outline:none;
-    background:white;
+    background:rgba(248,250,252,.9);
     color:#0f172a;
 }
 
-/* BUTTON */
 .calculate-btn{
     width:100%;
-    padding:12px;
-    margin-top:10px;
+    min-height:52px;
+    margin-top:12px;
     border:none;
-    border-radius:8px;
-    background:#38bdf8;
-    color:#0f172a;
-    font-weight:bold;
+    border-radius:16px;
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    font-weight:900;
     cursor:pointer;
-    transition:0.2s;
+    box-shadow:0 18px 34px rgba(37,99,235,.24);
+    transition:transform .24s ease, box-shadow .24s ease;
 }
 
 .calculate-btn:hover{
-    background:#0ea5e9;
+    transform:translateY(-3px);
+    box-shadow:0 22px 42px rgba(37,99,235,.32);
 }
 
-/* RESULT BOX */
 .result-box{
-    margin-top:20px;
-    padding:15px;
-    border-radius:10px;
-    background:#eff6ff;
+    margin-top:22px;
+    padding:18px;
+    border-radius:20px;
+    background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(16,185,129,.1));
     color:#0f172a;
-    box-shadow:0 0 10px rgba(59,130,246,0.18);
+    border:1px solid rgba(37,99,235,.14);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.7);
 }
 
 .result-box p{
     margin:8px 0;
+    font-weight:800;
 }
 
-/* DARK MODE */
-body.dark .page-header h1,
-body.dark section h2{
-    color:#f8fafc;
+body.dark .page-header h1::after{
+    color:#cbd5e1;
 }
 
 body.dark .attendance-card{
-    background:#1e293b;
-    box-shadow:0 10px 20px rgba(0,0,0,0.45);
+    background:
+        radial-gradient(circle at 20% 0%, rgba(96,165,250,.14), transparent 35%),
+        rgba(15,23,42,.78);
+    border-color:rgba(148,163,184,.22);
 }
 
-body.dark .attendance-card h2{
-    color:#38bdf8;
+body.dark .attendance-card h2,
+body.dark .result-box{
+    color:#f8fafc;
 }
 
 body.dark .input-group label{
@@ -107,38 +151,12 @@ body.dark .input-group label{
 
 body.dark .input-group input,
 body.dark .input-group select{
-    background:#0f172a;
+    background:rgba(15,23,42,.72);
     color:#e2e8f0;
-    border:1px solid #475569;
-}
-
-body.dark .calculate-btn{
-    background:#38bdf8;
-    color:#0f172a;
-}
-
-body.dark .calculate-btn:hover{
-    background:#0ea5e9;
+    border-color:rgba(148,163,184,.3);
 }
 
 body.dark .result-box{
-    background:#0f172a;
-    color:#f8fafc;
-    box-shadow:0 0 10px rgba(56,189,248,0.28);
-}
-
-/* RESPONSIVE */
-@media (max-width:768px){
-    .sidebar{
-        width:200px;
-    }
-
-    .attendance-card{
-        width:100%;
-        margin-left:0;
-    }
-
-    .attendance-container{
-        margin-left:0;
-    }
+    background:linear-gradient(135deg,rgba(37,99,235,.16),rgba(16,185,129,.12));
+    border-color:rgba(96,165,250,.24);
 }

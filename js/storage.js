@@ -19,6 +19,94 @@ function clearStorage() {
     localStorage.clear();
 }
 
+function showAppMessage(message, type = "info", options = {}) {
+
+    const existingToast =
+        document.querySelector(".app-toast");
+
+    if (existingToast) {
+        existingToast.remove();
+    }
+
+    const toast =
+        document.createElement("div");
+
+    toast.className =
+        `app-toast ${type}`;
+
+    toast.setAttribute(
+        "role",
+        "status"
+    );
+
+    toast.textContent =
+        message;
+
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(
+        () => toast.classList.add("show")
+    );
+
+    const duration =
+        options.duration || 1800;
+
+    window.setTimeout(
+        () => {
+
+            toast.classList.remove("show");
+
+            if (options.redirectTo) {
+                window.location.href =
+                    options.redirectTo;
+            }
+
+        },
+        duration
+    );
+
+}
+
+function flashAppMessage(message, type = "info") {
+
+    sessionStorage.setItem(
+        "appMessage",
+        JSON.stringify({
+            message,
+            type
+        })
+    );
+
+}
+
+function showPendingAppMessage() {
+
+    const pendingMessage =
+        sessionStorage.getItem("appMessage");
+
+    if (!pendingMessage) {
+        return;
+    }
+
+    sessionStorage.removeItem("appMessage");
+
+    try {
+        const parsedMessage =
+            JSON.parse(pendingMessage);
+
+        showAppMessage(
+            parsedMessage.message,
+            parsedMessage.type || "info"
+        );
+    } catch (error) {
+        showAppMessage(
+            pendingMessage,
+            "info"
+        );
+    }
+
+}
+
 // Protect pages
 function protectPage() {
 
@@ -45,8 +133,19 @@ function logout() {
         "currentUser"
     );
 
-    window.location.href =
-        "login.html";
+    flashAppMessage(
+        "Logged out successfully. See you soon!",
+        "success"
+    );
+
+    showAppMessage(
+        "Logging you out...",
+        "success",
+        {
+            duration: 900,
+            redirectTo: "login.html"
+        }
+    );
 
 }
 

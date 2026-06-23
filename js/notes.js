@@ -408,7 +408,10 @@ imageToggle.addEventListener("click", () => {
     if (!noteState.active) return;
 
     if (noteState.mode !== 'edit') {
-        alert("Switch to Edit mode to upload images.");
+        showAppMessage(
+            "Switch to Edit mode to upload images.",
+            "error"
+        );
         return;
     }
 

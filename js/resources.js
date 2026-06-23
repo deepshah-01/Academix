@@ -167,7 +167,10 @@ resourceForm.addEventListener("submit", async event => {
         renderResources();
         resetFormState();
     } catch (error) {
-        alert(error.message);
+        showAppMessage(
+            error.message,
+            "error"
+        );
     }
 });
 
@@ -241,7 +244,10 @@ function openResource(id) {
     const resource = resources.find(item => item.id === id);
 
     if (!resource || !resource.url) {
-        alert("This resource does not have a link or uploaded file.");
+        showAppMessage(
+            "This resource does not have a link or uploaded file.",
+            "error"
+        );
         return;
     }
 

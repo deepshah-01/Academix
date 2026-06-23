@@ -67,7 +67,18 @@ function logout(){
         "currentUser"
     );
 
-    window.location.href =
-        "login.html";
+    flashAppMessage(
+        "Logged out successfully. See you soon!",
+        "success"
+    );
+
+    showAppMessage(
+        "Logging you out...",
+        "success",
+        {
+            duration: 900,
+            redirectTo: "login.html"
+        }
+    );
 
 }
