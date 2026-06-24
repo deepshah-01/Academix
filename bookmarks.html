@@ -100,21 +100,15 @@
 
         <div class="filter-buttons">
 
-            <button
-                onclick="setBookmarkFilter('ALL')"
-            >
+            <button class="filter-btn" data-type="ALL" onclick="setBookmarkFilter('ALL', this)">
                 All
             </button>
 
-            <button
-                onclick="setBookmarkFilter('NOTES')"
-            >
+            <button class="filter-btn" data-type="NOTES" onclick="setBookmarkFilter('NOTES', this)">
                 📚 Notes
             </button>
 
-            <button
-                onclick="setBookmarkFilter('RESOURCES')"
-            >
+            <button class="filter-btn" data-type="RESOURCES" onclick="setBookmarkFilter('RESOURCES', this)">
                 📄 Resources
             </button>
 

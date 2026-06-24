@@ -65,9 +65,10 @@
     transition:transform .24s ease, background .24s ease;
 }
 
-.filter-buttons button:first-child{
+.filter-buttons button.active{
     background:linear-gradient(135deg,#2563eb,#06b6d4);
     color:white;
+    box-shadow:0 12px 28px rgba(37,99,235,.18);
 }
 
 .filter-buttons button:hover{

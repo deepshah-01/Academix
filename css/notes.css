@@ -158,11 +158,32 @@
 .icon-btn{
     border:none;
     cursor:pointer;
-    color:#334155;
-    background:rgba(37,99,235,.08);
+    color:var(--icon-color);
+    background:var(--icon-bg);
     padding:8px 9px;
     border-radius:12px;
     transition:transform .22s ease, background .22s ease, color .22s ease;
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:none;
+    cursor:pointer;
+    color:var(--icon-color);
+    background:var(--icon-bg);
+    border-radius:12px;
+}
+
+#pinToggle.active i {
+    color:#f59e0b;
+}
+
+#bookmarkToggle.active i {
+    color:#f97316;
 }
 
 .note-actions .btn:hover,
@@ -192,15 +213,16 @@
     box-shadow:0 30px 76px rgba(37,99,235,.13);
 }
 
-.editor-header{
+ .editor-header{
     display:flex;
+    flex-direction:column;
     gap:12px;
-    align-items:center;
     margin-bottom:14px;
 }
 
 .editor-header input[type="text"]{
-    flex:1;
+    width:100%;
+    min-width:0;
     padding:14px 15px;
     border:1px solid rgba(148,163,184,.34);
     border-radius:16px;
@@ -211,9 +233,44 @@
     font-weight:800;
 }
 
+ #noteTags{
+    flex:1 1 0;
+    min-width:220px;
+}
+
+.editor-row{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
 .editor-toggles{
     display:flex;
     gap:8px;
+    flex-shrink:0;
+}
+
+ #noteTitle{
+    width:100%;
+}
+
+@media (max-width: 940px) {
+    .editor-header{
+        flex-wrap:wrap;
+        align-items:flex-start;
+    }
+
+    #noteTitle,
+    #noteTags{
+        flex:1 1 100%;
+        min-width:0;
+    }
+
+    .editor-toggles{
+        width:100%;
+        justify-content:flex-start;
+    }
 }
 
 #noteContent{
@@ -315,7 +372,7 @@ body.dark .note-item.active{
 body.dark .note-title,
 body.dark .note-actions .btn,
 body.dark .icon-btn{
-    color:#f8fafc;
+    color:var(--icon-color);
 }
 
 body.dark .note-actions .btn,

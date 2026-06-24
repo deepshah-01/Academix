@@ -109,9 +109,10 @@
     transition:transform .24s ease, background .24s ease;
 }
 
-.filter-buttons button:first-child{
+.filter-buttons button.active{
     background:linear-gradient(135deg,#2563eb,#06b6d4);
     color:white;
+    box-shadow:0 12px 28px rgba(37,99,235,.18);
 }
 
 #resourceList{
@@ -123,21 +124,24 @@
 .resource-card{
     position:relative;
     overflow:hidden;
-    padding:22px;
+    padding:24px;
     border-radius:26px;
-    border:1px solid rgba(148,163,184,.28);
+    border:1px solid rgba(148,163,184,.24);
     background:
         radial-gradient(circle at 18% 0%, rgba(16,185,129,.12), transparent 34%),
-        rgba(255,255,255,.82);
-    box-shadow:0 20px 56px rgba(15,23,42,.09);
+        rgba(255,255,255,.88);
+    box-shadow:0 22px 58px rgba(15,23,42,.12);
     backdrop-filter:blur(18px);
-    transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease, background .3s ease;
 }
 
 .resource-card:hover{
-    transform:translateY(-6px);
-    border-color:rgba(37,99,235,.28);
-    box-shadow:0 28px 68px rgba(15,23,42,.14);
+    transform:translateY(-5px);
+    border-color:rgba(37,99,235,.35);
+    box-shadow:0 32px 86px rgba(37,99,235,.18);
+    background:
+        radial-gradient(circle at 18% 0%, rgba(37,99,235,.14), transparent 34%),
+        rgba(255,255,255,.92);
 }
 
 .resource-card h2{
@@ -170,30 +174,37 @@
     flex-wrap:wrap;
 }
 
-.openBtn,
-.bookmarkBtn,
-.deleteBtn{
-    border:none;
-    min-height:40px;
-    padding:0 13px;
-    border-radius:13px;
+.resource-buttons button{
+    min-height:44px;
+    padding:12px 18px;
+    border-radius:12px;
     cursor:pointer;
     color:white;
     text-decoration:none;
-    font-weight:900;
-    transition:transform .24s ease, box-shadow .24s ease;
+    font-weight:600;
+    letter-spacing:.01em;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    transition:transform .3s ease, box-shadow .3s ease, background .3s ease, opacity .3s ease;
+    box-shadow:0 10px 18px rgba(15,23,42,.12);
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
 }
 
-.openBtn{
-    background:#10b981;
+.resource-buttons button:hover{
+    transform:translateY(-3px) scale(1.05);
+    box-shadow:0 18px 32px rgba(37,99,235,.24);
 }
 
-.bookmarkBtn{
-    background:#f59e0b;
+.resource-buttons button:active{
+    transform:scale(0.95);
 }
 
+.openBtn,
+.bookmarkBtn,
+.editBtn,
 .deleteBtn{
-    background:#ef4444;
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
 }
 
 .empty-state{

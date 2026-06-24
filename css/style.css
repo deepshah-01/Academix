@@ -12,7 +12,16 @@
     --white: #FFFFFF;
     --text: #DCE7FF;
 
+    /* Icon color (dark by default -> used for Light Mode) */
+    --icon-color: #0f172a; /* dark slate */
+    --icon-bg: rgba(37,99,235,.08);
+
     --card: rgba(255,255,255,0.05);
+}
+
+/* Dark theme variable overrides (body.dark is applied by js/theme.js) */
+body.dark{
+    --icon-color: #f8fafc; /* near-white for dark mode */
 }
 
 html{
