@@ -8,7 +8,6 @@ const noteState = {
 const STORAGE_KEY = 'academix_notes';
 
 function saveToLocalStorage() {
-<<<<<<< Updated upstream
     localStorage.setItem(STORAGE_KEY, JSON.stringify(noteState.notes));
 }
 
@@ -20,35 +19,6 @@ function loadFromLocalStorage() {
         } catch (e) {
             console.error('Error loading notes:', e);
         }
-=======
-    saveData(STORAGE_KEY, noteState.notes);
-}
-
-function normalizeNote(note) {
-    const tags = Array.isArray(note.tags)
-        ? note.tags.map(tag => String(tag).trim()).filter(tag => tag !== '')
-        : typeof note.tags === 'string'
-            ? note.tags.split(',').map(tag => tag.trim()).filter(tag => tag !== '')
-            : [];
-
-    return {
-        id: note.id || `note-${Date.now()}`,
-        title: note.title || 'Untitled note',
-        content: note.content || '',
-        pinned: Boolean(note.pinned),
-        bookmarked: Boolean(note.bookmarked),
-        tags,
-        createdAt: note.createdAt || new Date().toLocaleString()
-    };
-}
-
-function loadFromLocalStorage() {
-    const storedNotes = getData(STORAGE_KEY);
-    if (Array.isArray(storedNotes)) {
-        noteState.notes = storedNotes.map(normalizeNote);
-    } else {
-        noteState.notes = [];
->>>>>>> Stashed changes
     }
 }
 
@@ -224,11 +194,8 @@ function setEditorState(active) {
 function updateToggleButtons(note) {
     pinToggle.classList.toggle('active', note.pinned);
     bookmarkToggle.classList.toggle('active', note.bookmarked);
-<<<<<<< Updated upstream
     pinToggle.querySelector('i').style.color = note.pinned ? '#f59e0b' : '#374151';
     bookmarkToggle.querySelector('i').style.color = note.bookmarked ? '#f97316' : '#374151';
-=======
->>>>>>> Stashed changes
 }
 
 function updateModeButtons() {
@@ -254,11 +221,7 @@ function selectNote(id) {
     if (!note) return;
 
     noteState.selectedId = id;
-<<<<<<< Updated upstream
     noteState.mode = 'preview';
-=======
-    noteState.mode = 'edit';
->>>>>>> Stashed changes
     noteState.active = true;
 
     noteTitle.value = note.title;
@@ -351,7 +314,6 @@ function togglePin(id) {
     if (!note) return;
     note.pinned = !note.pinned;
     addActivity(
-<<<<<<< Updated upstream
 
         note.pinned
             ?
@@ -359,9 +321,6 @@ function togglePin(id) {
             :
             "Unpinned note"
 
-=======
-        note.pinned ? "Pinned note" : "Unpinned note"
->>>>>>> Stashed changes
     );
     saveToLocalStorage();
     renderNotes();
@@ -374,12 +333,6 @@ function toggleBookmark(id) {
     const note = noteState.notes.find(item => item.id === id);
     if (!note) return;
     note.bookmarked = !note.bookmarked;
-<<<<<<< Updated upstream
-=======
-    addActivity(
-        note.bookmarked ? "Bookmarked note" : "Removed bookmark"
-    );
->>>>>>> Stashed changes
     saveToLocalStorage();
     renderNotes();
     if (noteState.selectedId === id) {
@@ -387,17 +340,6 @@ function toggleBookmark(id) {
     }
 }
 
-<<<<<<< Updated upstream
-=======
-function toggleEditorPinState() {
-    pinToggle.classList.toggle('active');
-}
-
-function toggleEditorBookmarkState() {
-    bookmarkToggle.classList.toggle('active');
-}
-
->>>>>>> Stashed changes
 function toggleViewMode() {
     noteState.mode = noteState.mode === 'edit' ? 'preview' : 'edit';
     updateModeButtons();
@@ -411,25 +353,10 @@ function initNotes() {
         if (noteState.selectedId) removeNote(noteState.selectedId);
     });
     pinToggle.addEventListener('click', () => {
-<<<<<<< Updated upstream
         if (noteState.selectedId) togglePin(noteState.selectedId);
     });
     bookmarkToggle.addEventListener('click', () => {
         if (noteState.selectedId) toggleBookmark(noteState.selectedId);
-=======
-        if (noteState.selectedId) {
-            togglePin(noteState.selectedId);
-        } else {
-            toggleEditorPinState();
-        }
-    });
-    bookmarkToggle.addEventListener('click', () => {
-        if (noteState.selectedId) {
-            toggleBookmark(noteState.selectedId);
-        } else {
-            toggleEditorBookmarkState();
-        }
->>>>>>> Stashed changes
     });
     toggleViewBtn.addEventListener('click', () => {
         if (noteState.active) toggleViewMode();
@@ -440,41 +367,7 @@ function initNotes() {
     renderNotes();
 }
 
-<<<<<<< Updated upstream
 window.addEventListener('DOMContentLoaded', initNotes);
-=======
-window.addEventListener(
-
-    "DOMContentLoaded",
-
-    () => {
-
-        initNotes();
-
-        const selectedId =
-
-            localStorage.getItem(
-
-                "selectedNoteId"
-
-            );
-
-        if (selectedId) {
-
-            selectNote(selectedId);
-
-            localStorage.removeItem(
-
-                "selectedNoteId"
-
-            );
-
-        }
-
-    }
-
-);
->>>>>>> Stashed changes
 
 
 const imageToggle = document.getElementById("imageToggle");
@@ -485,14 +378,7 @@ imageToggle.addEventListener("click", () => {
     if (!noteState.active) return;
 
     if (noteState.mode !== 'edit') {
-<<<<<<< Updated upstream
         alert("Switch to Edit mode to upload images.");
-=======
-        showAppMessage(
-            "Switch to Edit mode to upload images.",
-            "error"
-        );
->>>>>>> Stashed changes
         return;
     }
 
