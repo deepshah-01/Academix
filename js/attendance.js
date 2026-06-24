@@ -1,193 +1,43 @@
-protectPage();
+const calculateBtn = document.querySelector(".calculate-btn");
 
-let attendance =
-    getData("attendance");
+calculateBtn.addEventListener("click", () => {
+    const required = Number(document.getElementById("requiredPercentage").value);
+    const present = Number(document.getElementById("presentClasses").value);
+    const total = Number(document.getElementById("totalClasses").value);
 
+    const resultBox = document.getElementById("resultBox");
+    const attendanceText = document.getElementById("currentAttendance");
+    const bunkText = document.getElementById("bunkResult");
 
-// ------Calculate Percentage -----
-function calculateAttendance(attended,conducted) {
-    if (conducted === 0) {
-
-        return 0;
-
-    }
-
-    return (
-        (attended / conducted) * 100
-    ).toFixed(2);
-
-}
-
-// ---- Add Attendance ----
-function addAttendance(subject, conducted, attended){
-
-    const percentage =
-        calculateAttendance(
-            attended,
-            conducted
-        );
-
-    const record = {
-
-        id: Date.now(),
-
-        subject,
-
-        conducted,
-
-        attended,
-
-        percentage,
-
-        status:
-            percentage >= 75? "Safe": "Low"
-    };
-
-    attendance.push(record);
-
-    saveData(
-        "attendance",
-        attendance
-    );
-
-}
-
-// ---- Render Attendance ----
-function renderAttendance(){
-
-    const attendanceList =
-        document.getElementById(
-            "attendanceList"
-        );
-
-    attendanceList.innerHTML = "";
-
-    attendance.forEach(function(record){
-
-        attendanceList.innerHTML += `
-
-        <div class="card">
-
-            <h3>${record.subject}</h3>
-
-            <p>
-                Conducted :
-                ${record.conducted}
-            </p>
-
-            <p>
-                Attended :
-                ${record.attended}
-            </p>
-
-            <p>
-                Attendance :
-                ${record.percentage}%
-            </p>
-
-            <p>
-                Status :
-                ${record.status}
-            </p>
-
-            <button
-                class="deleteBtn"
-                onclick="deleteAttendance(${record.id})"
-            >
-                Delete
-            </button>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-// ---- Delete Attendance ----
-function deleteAttendance(id) {
-
-    if (
-        !confirm(
-            "Delete this attendance record?"
-        )
-    ) {
-
+    //  validation
+    if (present < 0 || total <= 0 || present > total) {
+        resultBox.style.display = "block";
+        attendanceText.textContent = "Invalid input values";
+        bunkText.textContent = "";
         return;
-
     }
 
-    attendance =
-        attendance.filter(
-            record =>
-                record.id !== id
-        );
+    //  current attendance
+    const currentAttendance = (present / total) * 100;
 
-    saveData(
-        "attendance",
-        attendance
-    );
+    attendanceText.textContent =
+        `📈Current Attendance: ${currentAttendance.toFixed(2)}%`;
 
-    renderAttendance();
+    //  bunk logic
+    if (currentAttendance < required) {
+        const neededClasses =
+            Math.ceil((required * total - 100 * present) / (100 - required));
 
-}
+        bunkText.textContent =
+            `❌ You cannot bunk. You need to attend next ${neededClasses} classes to reach ${required}%.`;
+    } else {
+        const maxBunks =
+            Math.floor((present * 100 - required * total) / required);
 
-// ---- Form Submit ----
-const attendanceForm =
-    document.getElementById(
-        "attendanceForm"
-    );
+        bunkText.textContent =
+            `You can bunk ${maxBunks} more classes and still maintain ${required}%.`;
+    }
 
-if (attendanceForm) {
-
-    attendanceForm.addEventListener(
-        "submit",
-        function (e) {
-
-            e.preventDefault();
-
-            const subject =
-                document.getElementById(
-                    "subject"
-                ).value;
-
-            const conducted =
-                Number(
-                    document.getElementById(
-                        "conducted"
-                    ).value
-                );
-
-            const attended =
-                Number(
-                    document.getElementById(
-                        "attended"
-                    ).value
-                );
-
-            if (attended > conducted) {
-
-                alert(
-                    "Attended lectures cannot exceed conducted lectures!"
-                );
-
-                return;
-
-            }
-
-            addAttendance(
-                subject,
-                conducted,
-                attended
-            );
-
-            renderAttendance();
-
-            attendanceForm.reset();
-
-        }
-    );
-
-}
-renderAttendance();
+    // show result
+    resultBox.style.display = "block";
+});

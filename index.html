@@ -3,121 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="Academix helps students manage notes, attendance, resources, bookmarks, and academic progress in one place."
+    >
     <title>Academix</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="home-page">
+    <header class="navbar">
+        <a class="logo" href="index.html" aria-label="Academix home">
+            Academi<span style="color:#10B981;">X</span>
+        </a>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">Academi<span style="color:#10B981;">X</span></div>
+        <nav aria-label="Primary">
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
 
-        <ul class="nav-links">
-            <li><a href="#features">Features</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
-
-        <a href="signup.html" class="signup-btn">Get Started</a>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-
-        <div class="badge">
-            🎓 The Ultimate Student Workspace
+        <div class="nav-actions">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="signup.html" class="signup-btn">Get Started</a>
         </div>
+    </header>
 
-        <h1>
+    <main>
+        <section class="hero">
+            <div class="badge">🎓 The Ultimate Student Workspace</div>
+
             <h1>
-                Your Academic Journey,     
+                Your Academic Journey,
                 <span>Organized.</span>
             </h1>
-        </h1>
 
-        <p>
-            Manage attendance, notes, PYQs, resources, bookmarks,
-            and academic progress from one powerful dashboard.
-        </p>
+            <p>
+                Manage attendance, notes, PYQs, resources, bookmarks, and academic progress
+                from one powerful dashboard built for busy students.
+            </p>
 
-        <div class="hero-buttons">
-            <a href="signup.html" class="primary-btn">
-                Start for Free →
-            </a>
-
-            <a href="#features" class="secondary-btn">
-                Explore Features
-            </a>
-        </div>
-
-    <!-- Features Section -->
-
-    <section id="features" class="features">
-
-        <h2>Features</h2>
-
-        <div class="feature-grid">
-
-            <div class="feature-card">
-                📚
-                <h3>Notes Library</h3>
-                <p>Upload and access subject-wise notes anytime.</p>
+            <div class="hero-buttons">
+                <a href="signup.html" class="primary-btn">Start for Free →</a>
+                <a href="#features" class="secondary-btn">Explore Features</a>
             </div>
 
-            <div class="feature-card">
-                📊
-                <h3>Attendance Tracker</h3>
-                <p>Track attendance percentage and academic progress.</p>
+            <div class="floating-container" aria-hidden="true">
+                <div class="card card1">📚 500+ Notes</div>
+                <div class="card card2">📊 Attendance Tracker</div>
+                <div class="card card3">📄 PYQ Library</div>
             </div>
+        </section>
 
-            <div class="feature-card">
-                📄
-                <h3>PYQ Collection</h3>
-                <p>Previous year question papers organized by subject.</p>
+        <section id="features" class="features">
+            <h2>Features</h2>
+
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <h3>Notes Library</h3>
+                    <p>Upload and access subject-wise notes anytime.</p>
+                </article>
+
+                <article class="feature-card">
+                    <h3>Attendance Tracker</h3>
+                    <p>Track attendance percentage and academic progress.</p>
+                </article>
+
+                <article class="feature-card">
+                    <h3>PYQ Collection</h3>
+                    <p>Previous year question papers organized by subject.</p>
+                </article>
+
+                <article class="feature-card">
+                    <h3>Bookmarks</h3>
+                    <p>Save important notes and resources for quick access.</p>
+                </article>
             </div>
+        </section>
 
-            <div class="feature-card">
-                🔖
-                <h3>Bookmarks</h3>
-                <p>Save important notes and resources for quick access.</p>
-            </div>
+        <section id="about" class="about">
+            <h2>About Academix</h2>
 
-        </div>
-
-    </section>
-
-
-    <!-- About Section -->
-
-    <section id="about" class="about">
-
-        <h2>About Academix</h2>
-
-        <p>
-            Academix is a student-focused academic management platform
-            designed to help learners organize notes, track attendance,
-            access previous year papers, and manage educational resources
-            from one centralized dashboard.
-        </p>
-
-    </section>
-        <!-- Floating Cards -->
-        <div class="floating-container">
-            <div class="card card1">
-                📚 500+ Notes
-            </div>
-
-            <div class="card card2">
-                📊 Attendance Tracker
-            </div>
-
-            <div class="card card3">
-                📄 PYQ Library
-            </div>
-        </div>
-
-    </section>
-
+            <p>
+                Academix is a student-focused academic management platform designed to help learners
+                organize notes, track attendance, access previous year papers, and manage educational
+                resources from one centralized dashboard.
+            </p>
+        </section>
+    </main>
 </body>
 </html>
-

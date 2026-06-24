@@ -1,0 +1,84 @@
+const currentUser =
+    JSON.parse(
+        localStorage.getItem(
+            "currentUser"
+        )
+    );
+
+if(!currentUser){
+
+    window.location.href =
+        "login.html";
+
+}
+
+document.getElementById(
+    "userName"
+).innerText =
+    currentUser.name;
+
+document.getElementById(
+    "userEmail"
+).innerText =
+    currentUser.email;
+
+const notes =
+    getData(
+        "academix_notes"
+    );
+
+const resources =
+    getData(
+        "resources"
+    );
+
+const bookmarkedNotes =
+    notes.filter(
+        note =>
+        note.bookmarked
+    ).length;
+
+const bookmarkedResources =
+    resources.filter(
+        resource =>
+        resource.bookmarked
+    ).length;
+
+document.getElementById(
+    "totalNotes"
+).innerText =
+    notes.length;
+
+document.getElementById(
+    "totalResources"
+).innerText =
+    resources.length;
+
+document.getElementById(
+    "totalBookmarks"
+).innerText =
+    bookmarkedNotes +
+    bookmarkedResources;
+
+
+function logout(){
+
+    localStorage.removeItem(
+        "currentUser"
+    );
+
+    flashAppMessage(
+        "Logged out successfully. See you soon!",
+        "success"
+    );
+
+    showAppMessage(
+        "Logging you out...",
+        "success",
+        {
+            duration: 900,
+            redirectTo: "login.html"
+        }
+    );
+
+}

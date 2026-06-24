@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Global Search - Academix</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+    <link
+        rel="stylesheet"
+        href="css/sidebar.css"
+    >
+    <link
+        rel="stylesheet"
+        href="css/search.css"
+    >
+    <link
+        rel="stylesheet"
+        href="css/responsive.css"
+    >
+
+</head>
+<body>
+
+    <aside class="sidebar">
+
+        <h2 class="logo">
+
+            Academix
+
+        </h2>
+
+        <ul>
+
+            <li>
+
+                <a href="dashboard.html">
+
+                    🏠 Dashboard
+
+                </a>
+
+            </li>
+
+            <li><a href = "attendance.html" >📊 Attendance</a></li>
+
+            <li>
+
+                <a href="notes.html">
+
+                    📚 Notes
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="resources.html">
+
+                    📄 Resources
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="bookmarks.html">
+
+                    🔖 Bookmarks
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <a href="search.html">
+
+                    🔍 Global Search
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="profile.html">
+
+                    👤 Profile
+
+                </a>
+
+            </li>
+
+            <li onclick="logout()">
+                🚪 Logout
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <main class="main-content">
+
+        <h1>
+
+            🔍 Global Search
+
+        </h1>
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search notes, resources, tags..."
+        >
+
+        <div id="searchResults">
+
+        </div>
+
+    </main>
+
+    <script src="js/storage.js"></script>
+
+    <script src="js/search.js"></script>
+    <script src="js/theme.js"></script>
+
+</body>
+</html>

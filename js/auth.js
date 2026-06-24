@@ -15,8 +15,11 @@ function signup(
     );
 
     if (userExists) {
-        alert("Email already registered!");
-        return false;
+        return {
+            success: false,
+            message: "This email already has an Academix account. Please login instead.",
+            type: "error"
+        };
     }
 
     const newUser = {
@@ -33,12 +36,11 @@ function signup(
 
     saveData("users", users);
 
-    localStorage.setItem(
-        "currentUser",
-        JSON.stringify(newUser)
-    );
-
-    return true;
+    return {
+        success: true,
+        message: "Account created successfully! Redirecting to login...",
+        type: "success"
+    };
 }
 
 
@@ -47,23 +49,36 @@ function login(email, password) {
 
     const users = getData("users");
 
-    const user = users.find(
-        user =>
-            user.email === email &&
-            user.password === password
+    const userByEmail = users.find(
+        user => user.email === email
     );
 
-    if (user) {
-
-        localStorage.setItem(
-            "currentUser",
-            JSON.stringify(user)
-        );
-
-        return true;
+    if (!userByEmail) {
+        return {
+            success: false,
+            message: "No account found with this email. Please create an account first.",
+            type: "error"
+        };
     }
 
-    return false;
+    if (userByEmail.password !== password) {
+        return {
+            success: false,
+            message: "Password is incorrect. Please try again.",
+            type: "error"
+        };
+    }
+
+    localStorage.setItem(
+        "currentUser",
+        JSON.stringify(userByEmail)
+    );
+
+    return {
+        success: true,
+        message: "Login successful! Opening your dashboard...",
+        type: "success"
+    };
 }
 
 
@@ -72,7 +87,19 @@ function logout() {
 
     localStorage.removeItem("currentUser");
 
-    window.location.href = "login.html";
+    flashAppMessage(
+        "Logged out successfully. See you soon!",
+        "success"
+    );
+
+    showAppMessage(
+        "Logging you out...",
+        "success",
+        {
+            duration: 900,
+            redirectTo: "login.html"
+        }
+    );
 
 }
 
@@ -142,12 +169,15 @@ if (signupForm) {
 
         if (password !== confirmPassword) {
 
-            alert("Passwords do not match!");
+            showAppMessage(
+                "Passwords do not match. Please check both fields.",
+                "error"
+            );
             return;
 
         }
 
-        const success = signup(
+        const result = signup(
             name,
             email,
             password,
@@ -156,13 +186,17 @@ if (signupForm) {
             year
         );
 
-        if (success) {
+        showAppMessage(
+            result.message,
+            result.type,
+            result.success
+                ? {
+                    duration: 1800,
+                    redirectTo: "login.html"
+                }
+                : {}
+        );
 
-            alert("Account Created Successfully!");
-
-            window.location.href = "dashboard.html";
-
-        }
 
     });
 
@@ -184,20 +218,25 @@ if (loginForm) {
         const password =
             document.getElementById("password").value;
 
-        const success = login(email, password);
+        const result = login(email, password);
 
-        if (success) {
+        showAppMessage(
+            result.message,
+            result.type,
+            result.success
+                ? {
+                    duration: 1500,
+                    redirectTo: "dashboard.html"
+                }
+                : {}
+        );
 
-            alert("Login Successful!");
-
-            window.location.href = "dashboard.html";
-
-        } else {
-
-            alert("Invalid Email or Password!");
-
-        }
 
     });
 
 }
+
+document.addEventListener(
+    "DOMContentLoaded",
+    showPendingAppMessage
+);

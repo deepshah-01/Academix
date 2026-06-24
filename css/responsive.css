@@ -1,0 +1,415 @@
+@media (max-width: 1180px){
+    .main-content,
+    .attendance-container{
+        padding:28px 22px 42px;
+    }
+
+    .cards{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .overview,
+    .dashboard-hero{
+        grid-template-columns:1fr;
+    }
+
+    #resourceList,
+    #bookmarkList,
+    #searchResults{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .notes-layout{
+        height:auto;
+        min-height:0;
+    }
+}
+
+@media (max-width: 900px){
+    body{
+        display:flex;
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        min-height:auto;
+        height:auto;
+        position:sticky;
+        top:0;
+        z-index:1000;
+        padding:14px 14px 12px;
+        border-right:0;
+        border-bottom:1px solid rgba(255,255,255,.1);
+    }
+
+    .sidebar .logo{
+        margin:0 0 10px;
+        padding:4px 2px 8px;
+        font-size:1.35rem;
+    }
+
+    .sidebar .logo::after{
+        display:none;
+    }
+
+    .sidebar ul{
+        display:flex;
+        flex-wrap:nowrap;
+        gap:8px;
+        overflow-x:auto;
+        padding-bottom:4px;
+        scroll-snap-type:x mandatory;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .sidebar ul::-webkit-scrollbar{
+        height:0;
+    }
+
+    .sidebar li{
+        flex:0 0 auto;
+        min-width:max-content;
+        scroll-snap-align:start;
+        border-radius:999px;
+    }
+
+    .sidebar li:hover,
+    .sidebar li.active{
+        transform:translateY(-2px);
+    }
+
+    .sidebar li a,
+    .sidebar li:not(:has(a)){
+        min-height:42px;
+        padding:11px 14px;
+        font-size:.9rem;
+        white-space:nowrap;
+    }
+
+    .main-content,
+    .attendance-container{
+        width:100%;
+        min-height:auto;
+        margin-left:0;
+        padding:22px 16px 40px;
+        overflow:visible;
+    }
+
+    .main-content::before,
+    .attendance-container::before{
+        width:260px;
+        height:260px;
+        right:-130px;
+        top:-110px;
+    }
+
+    .main-content h1,
+    .page-header h1{
+        font-size:clamp(2rem,8vw,2.8rem);
+        margin-bottom:18px;
+    }
+
+    .top-bar,
+    .activity-header,
+    .bookmark-controls,
+    .editor-header{
+        align-items:stretch;
+        flex-direction:column;
+    }
+
+    .top-actions,
+    .hero-actions,
+    .resource-buttons,
+    .bookmark-buttons,
+    .filter-buttons,
+    .editor-actions{
+        width:100%;
+        flex-wrap:wrap;
+    }
+
+    .top-actions > *,
+    .hero-actions a,
+    .resource-buttons button,
+    .bookmark-buttons button,
+    .filter-buttons button,
+    .editor-actions button,
+    .activity-header a,
+    #themeBtn{
+        width:100%;
+    }
+
+    .dashboard-hero,
+    .focus-card,
+    .insight-card,
+    .activity-card,
+    .metric-card,
+    .attendance-card,
+    .profile-card,
+    .stat-card,
+    .resource-card,
+    .bookmark-card,
+    .search-card,
+    .notes-sidebar,
+    .note-editor,
+    #resourceForm,
+    .bookmark-controls{
+        border-radius:24px;
+    }
+
+    .dashboard-hero{
+        padding:26px;
+        min-height:auto;
+    }
+
+    .dashboard-hero h2{
+        font-size:clamp(2.15rem,9vw,3.4rem);
+    }
+
+    .hero-visual{
+        display:none;
+    }
+
+    .cards,
+    .focus-grid,
+    .stats-grid,
+    #resourceList,
+    #bookmarkList,
+    #searchResults{
+        grid-template-columns:1fr;
+    }
+
+    .overview{
+        grid-template-columns:1fr;
+        gap:18px;
+    }
+
+    .notes-layout{
+        flex-direction:column;
+        height:auto;
+        min-height:0;
+        gap:18px;
+    }
+
+    .notes-sidebar,
+    .note-editor{
+        width:100%;
+        max-height:none;
+    }
+
+    .note-editor{
+        min-height:470px;
+    }
+
+    #resourceForm{
+        grid-template-columns:1fr;
+    }
+
+    #searchBookmark,
+    #sortBookmarks{
+        min-width:0;
+        width:100%;
+    }
+
+    .app-toast{
+        left:16px;
+        right:16px;
+        top:16px;
+        max-width:none;
+    }
+}
+
+@media (max-width: 640px){
+    .main-content,
+    .attendance-container{
+        padding:18px 12px 34px;
+    }
+
+    .sidebar{
+        padding:12px;
+    }
+
+    .sidebar .logo{
+        font-size:1.22rem;
+    }
+
+    .sidebar li a,
+    .sidebar li:not(:has(a)){
+        min-height:38px;
+        padding:9px 12px;
+        font-size:.82rem;
+    }
+
+    .page-kicker,
+    .section-eyebrow,
+    .hero-pill{
+        font-size:.68rem;
+        white-space:normal;
+    }
+
+    .dashboard-hero,
+    .focus-card,
+    .insight-card,
+    .activity-card,
+    .metric-card,
+    .attendance-card,
+    .profile-card,
+    .stat-card,
+    .resource-card,
+    .bookmark-card,
+    .search-card,
+    .notes-sidebar,
+    .note-editor,
+    #resourceForm,
+    .bookmark-controls,
+    .empty-state{
+        padding:18px;
+        border-radius:20px;
+    }
+
+    .metric-card{
+        min-height:154px;
+    }
+
+    .metric-label{
+        margin-top:16px;
+    }
+
+    .big-card h2,
+    .activity-card h2,
+    .attendance-card h2,
+    .profile-card h2{
+        font-size:clamp(1.45rem,7vw,2rem);
+    }
+
+    .focus-grid a{
+        min-height:96px;
+        padding:15px;
+    }
+
+    .activity-item{
+        padding:15px 15px 15px 42px;
+    }
+
+    .note-item{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .note-actions{
+        width:100%;
+        justify-content:flex-start;
+        margin-left:0;
+    }
+
+    .editor-toggles{
+        justify-content:space-between;
+    }
+
+    .editor-toggles .icon-btn{
+        flex:1;
+    }
+
+    #searchInput,
+    #searchResource,
+    #searchBookmark,
+    #sortBookmarks,
+    #searchNote,
+    #resourceForm input,
+    #resourceForm select,
+    .editor-header input[type="text"],
+    .input-group input,
+    .input-group select{
+        min-height:46px;
+        font-size:16px;
+    }
+}
+
+@media (max-width: 420px){
+    .main-content h1,
+    .page-header h1{
+        font-size:2rem;
+        letter-spacing:-.05em;
+    }
+
+    .top-bar h1{
+        font-size:2rem;
+    }
+
+    .dashboard-hero h2{
+        font-size:2rem;
+    }
+
+    .dashboard-hero p,
+    .big-card p,
+    .page-header h1::after,
+    .main-content h1::after{
+        font-size:.94rem;
+        line-height:1.6;
+    }
+
+    .metric-card p,
+    .stat-card p{
+        font-size:2rem;
+    }
+
+    .profile-card::before{
+        width:64px;
+        height:64px;
+        border-radius:22px;
+    }
+
+    .resource-buttons,
+    .bookmark-buttons,
+    .filter-buttons,
+    .editor-actions{
+        gap:8px;
+    }
+}
+
+@media (max-width: 360px){
+    .main-content,
+    .attendance-container{
+        padding-left:10px;
+        padding-right:10px;
+    }
+
+    .dashboard-hero,
+    .focus-card,
+    .insight-card,
+    .activity-card,
+    .metric-card,
+    .attendance-card,
+    .profile-card,
+    .stat-card,
+    .resource-card,
+    .bookmark-card,
+    .search-card,
+    .notes-sidebar,
+    .note-editor,
+    #resourceForm,
+    .bookmark-controls,
+    .empty-state{
+        padding:15px;
+    }
+
+    .sidebar li a,
+    .sidebar li:not(:has(a)){
+        font-size:.78rem;
+    }
+}
+
+@media (hover: none){
+    .metric-card:hover,
+    .big-card:hover,
+    .activity-card:hover,
+    .attendance-card:hover,
+    .resource-card:hover,
+    .bookmark-card:hover,
+    .search-card:hover,
+    .stat-card:hover,
+    .note-item:hover,
+    .focus-grid a:hover{
+        transform:none;
+    }
+}
