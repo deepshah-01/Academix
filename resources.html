@@ -136,39 +136,38 @@
         <input
             type="text"
             id="searchResource"
-            placeholder="Search resources..."
+            placeholder="🔍Search resources..."
         >
 
         <div class="filter-buttons">
-        
-            <button onclick="setFilter('ALL')">
+            <button class="filter-btn" data-type="ALL" onclick="setFilter('ALL', this)">
                 All
             </button>
-        
-            <button onclick="setFilter('PDF')">
+
+            <button class="filter-btn" data-type="PDF" onclick="setFilter('PDF', this)">
                 📄 PDF
             </button>
-        
-            <button onclick="setFilter('PPT')">
+
+            <button class="filter-btn" data-type="PPT" onclick="setFilter('PPT', this)">
                 📊 PPT
             </button>
-        
-            <button onclick="setFilter('VIDEO')">
+
+            <button class="filter-btn" data-type="VIDEO" onclick="setFilter('VIDEO', this)">
                 🎥 Video
             </button>
-        
-            <button onclick="setFilter('PYQ')">
+
+            <button class="filter-btn" data-type="PYQ" onclick="setFilter('PYQ', this)">
                 📝 PYQ
             </button>
-        
-            <button onclick="setFilter('LINK')">
+
+            <button class="filter-btn" data-type="LINK" onclick="setFilter('LINK', this)">
                 🔗 Link
             </button>
-        
-            <button onclick="setFilter('BOOK')">
+
+            <button class="filter-btn" data-type="BOOK" onclick="setFilter('BOOK', this)">
                 📚 Book
             </button>
-        
+
         </div>
         <!-- Resources List -->
 

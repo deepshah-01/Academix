@@ -19,9 +19,19 @@ searchBookmark.addEventListener(
     renderBookmarks
 );
 
-function setBookmarkFilter(type){
+function setBookmarkFilter(type, el) {
 
     bookmarkFilter = type;
+
+    // Update active class on filter buttons
+    const btns = document.querySelectorAll('.filter-buttons .filter-btn');
+    btns.forEach(b => b.classList.remove('active'));
+
+    let activeBtn = null;
+    if (el) activeBtn = el;
+    else activeBtn = document.querySelector(`.filter-buttons .filter-btn[data-type="${type}"]`);
+
+    if (activeBtn) activeBtn.classList.add('active');
 
     renderBookmarks();
 
@@ -398,3 +408,6 @@ function    renderBookmarks(){
 }
 
 renderBookmarks();
+// Initialize active bookmark filter button
+const _bmInitial = document.querySelector(`.filter-buttons .filter-btn[data-type="${bookmarkFilter}"]`);
+if (_bmInitial) _bmInitial.classList.add('active');

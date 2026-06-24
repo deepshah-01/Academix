@@ -228,12 +228,12 @@ function renderResources() {
                 }
 
                 <div class="resource-buttons">
-                    <button onclick="openResource(${resource.id})">Open</button>
-                    <button onclick="toggleBookmark(${resource.id})">
+                    <button class="openBtn" onclick="openResource(${resource.id})">Open</button>
+                    <button class="bookmarkBtn" onclick="toggleBookmark(${resource.id})">
                         ${resource.bookmarked ? "Unbookmark" : "Bookmark"}
                     </button>
-                    <button onclick="editResource(${resource.id})">Edit</button>
-                    <button onclick="deleteResource(${resource.id})">Delete</button>
+                    <button class="editBtn" onclick="editResource(${resource.id})">Edit</button>
+                    <button class="deleteBtn" onclick="deleteResource(${resource.id})">Delete</button>
                 </div>
             </div>
         `;
@@ -254,8 +254,25 @@ function openResource(id) {
     window.open(resource.url, "_blank", "noopener,noreferrer");
 }
 
-function setFilter(type) {
+function setFilter(type, el) {
     currentFilter = type;
+
+    // Toggle active class on filter buttons
+    const btns = document.querySelectorAll('.filter-buttons .filter-btn');
+    btns.forEach(b => b.classList.remove('active'));
+
+    let activeBtn = null;
+
+    if (el) {
+        activeBtn = el;
+    } else {
+        activeBtn = document.querySelector(`.filter-buttons .filter-btn[data-type="${type}"]`);
+    }
+
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+    }
+
     renderResources();
 }
 
@@ -315,3 +332,7 @@ function getIcon(type) {
 }
 
 renderResources();
+
+// Initialize active filter button on load
+const _initialBtn = document.querySelector(`.filter-buttons .filter-btn[data-type="${currentFilter}"]`);
+if (_initialBtn) _initialBtn.classList.add('active');

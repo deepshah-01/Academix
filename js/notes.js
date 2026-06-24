@@ -8,17 +8,33 @@ const noteState = {
 const STORAGE_KEY = 'academix_notes';
 
 function saveToLocalStorage() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(noteState.notes));
+    saveData(STORAGE_KEY, noteState.notes);
+}
+
+function normalizeNote(note) {
+    const tags = Array.isArray(note.tags)
+        ? note.tags.map(tag => String(tag).trim()).filter(tag => tag !== '')
+        : typeof note.tags === 'string'
+            ? note.tags.split(',').map(tag => tag.trim()).filter(tag => tag !== '')
+            : [];
+
+    return {
+        id: note.id || `note-${Date.now()}`,
+        title: note.title || 'Untitled note',
+        content: note.content || '',
+        pinned: Boolean(note.pinned),
+        bookmarked: Boolean(note.bookmarked),
+        tags,
+        createdAt: note.createdAt || new Date().toLocaleString()
+    };
 }
 
 function loadFromLocalStorage() {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-        try {
-            noteState.notes = JSON.parse(stored);
-        } catch (e) {
-            console.error('Error loading notes:', e);
-        }
+    const storedNotes = getData(STORAGE_KEY);
+    if (Array.isArray(storedNotes)) {
+        noteState.notes = storedNotes.map(normalizeNote);
+    } else {
+        noteState.notes = [];
     }
 }
 
@@ -194,8 +210,6 @@ function setEditorState(active) {
 function updateToggleButtons(note) {
     pinToggle.classList.toggle('active', note.pinned);
     bookmarkToggle.classList.toggle('active', note.bookmarked);
-    pinToggle.querySelector('i').style.color = note.pinned ? '#f59e0b' : '#374151';
-    bookmarkToggle.querySelector('i').style.color = note.bookmarked ? '#f97316' : '#374151';
 }
 
 function updateModeButtons() {
@@ -314,13 +328,7 @@ function togglePin(id) {
     if (!note) return;
     note.pinned = !note.pinned;
     addActivity(
-
-        note.pinned
-            ?
-            "Pinned note"
-            :
-            "Unpinned note"
-
+        note.pinned ? "Pinned note" : "Unpinned note"
     );
     saveToLocalStorage();
     renderNotes();
@@ -333,11 +341,22 @@ function toggleBookmark(id) {
     const note = noteState.notes.find(item => item.id === id);
     if (!note) return;
     note.bookmarked = !note.bookmarked;
+    addActivity(
+        note.bookmarked ? "Bookmarked note" : "Removed bookmark"
+    );
     saveToLocalStorage();
     renderNotes();
     if (noteState.selectedId === id) {
         updateToggleButtons(note);
     }
+}
+
+function toggleEditorPinState() {
+    pinToggle.classList.toggle('active');
+}
+
+function toggleEditorBookmarkState() {
+    bookmarkToggle.classList.toggle('active');
 }
 
 function toggleViewMode() {
@@ -353,10 +372,18 @@ function initNotes() {
         if (noteState.selectedId) removeNote(noteState.selectedId);
     });
     pinToggle.addEventListener('click', () => {
-        if (noteState.selectedId) togglePin(noteState.selectedId);
+        if (noteState.selectedId) {
+            togglePin(noteState.selectedId);
+        } else {
+            toggleEditorPinState();
+        }
     });
     bookmarkToggle.addEventListener('click', () => {
-        if (noteState.selectedId) toggleBookmark(noteState.selectedId);
+        if (noteState.selectedId) {
+            toggleBookmark(noteState.selectedId);
+        } else {
+            toggleEditorBookmarkState();
+        }
     });
     toggleViewBtn.addEventListener('click', () => {
         if (noteState.active) toggleViewMode();

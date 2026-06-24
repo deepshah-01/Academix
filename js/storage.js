@@ -6,9 +6,14 @@ function saveData(key, data) {
 }
 
 function getData(key) {
-    return JSON.parse(
-        localStorage.getItem(key)
-    ) || [];
+    const raw = localStorage.getItem(key);
+    if (!raw) return [];
+    try {
+        return JSON.parse(raw) || [];
+    } catch (error) {
+        console.error(`Failed to parse localStorage key ${key}:`, error);
+        return [];
+    }
 }
 
 function removeData(key) {

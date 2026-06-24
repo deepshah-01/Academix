@@ -9,6 +9,8 @@
     --dashboard-green:#10b981;
     --dashboard-purple:#7c3aed;
     --dashboard-shadow:0 24px 70px rgba(15,23,42,.12);
+    --action-height:48px;
+    --action-width:clamp(160px,16vw,260px);
 }
 
 .dashboard-page{
@@ -83,7 +85,7 @@
 
 .top-bar h1{
     color:var(--dashboard-text);
-    margin-top:10px;
+    margin-top: 15px;
     font-size:clamp(2rem,4vw,3.6rem);
     letter-spacing:-.05em;
     line-height:.95;
@@ -91,9 +93,9 @@
 
 .top-actions{
     display:flex;
-    align-items:center;
+    align-items:center; /* keep vertical center alignment */
     gap:12px;
-    flex-wrap:wrap;
+    flex-wrap:nowrap; /* prevent buttons from shifting vertically on wide screens */
 }
 
 .ghost-action,
@@ -109,6 +111,16 @@
     font-weight:800;
     text-decoration:none;
     transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+/* Top-actions specific sizing to keep both buttons identical */
+.top-actions > .ghost-action,
+.top-actions > .primary-action{
+    height:var(--action-height);
+    width:var(--action-width);
+    box-sizing:border-box;
+    padding:0 18px; /* keep left/right padding while enforcing fixed height/width */
+    text-align:center;
 }
 
 .ghost-action{
