@@ -52,6 +52,53 @@
                     <button type="submit">Login</button>
                 </form>
 
+                <button id="forgotPasswordBtn" class="text-action" type="button">
+                    Forgot password?
+                </button>
+
+                <form id="resetPasswordForm" class="auth-form reset-form" hidden>
+                    <label class="field" for="resetEmail">
+                        <span>Email address</span>
+                        <input
+                            type="email"
+                            id="resetEmail"
+                            name="resetEmail"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </label>
+
+                    <label class="field" for="newPassword">
+                        <span>New password</span>
+                        <input
+                            type="password"
+                            id="newPassword"
+                            name="newPassword"
+                            placeholder="6–12 chars, letter, number, symbol"
+                            autocomplete="new-password"
+                            required
+                        >
+                    </label>
+
+                    <label class="field" for="confirmNewPassword">
+                        <span>Confirm new password</span>
+                        <input
+                            type="password"
+                            id="confirmNewPassword"
+                            name="confirmNewPassword"
+                            placeholder="Repeat new password"
+                            autocomplete="new-password"
+                            required
+                        >
+                    </label>
+
+                    <button type="submit">Reset password</button>
+                    <button id="backToLoginBtn" class="secondary-auth-btn" type="button">
+                        Back to login
+                    </button>
+                </form>
+
                 <p class="auth-link">
                     Don't have an account?
                     <a href="signup.html">Create account</a>

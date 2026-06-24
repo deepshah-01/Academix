@@ -1,4 +1,36 @@
 // ---------- Signup ----------
+function validatePasswordPolicy(password) {
+
+    const hasValidLength =
+        password.length >= 6 && password.length <= 12;
+
+    const hasLetter =
+        /[A-Za-z]/.test(password);
+
+    const hasNumber =
+        /\d/.test(password);
+
+    const hasSymbol =
+        /[^A-Za-z0-9]/.test(password);
+
+    if (
+        hasValidLength &&
+        hasLetter &&
+        hasNumber &&
+        hasSymbol
+    ) {
+        return {
+            success: true,
+            message: "Password looks strong."
+        };
+    }
+
+    return {
+        success: false,
+        message: "Password must be 6–12 characters and include a letter, number, and symbol."
+    };
+}
+
 function signup(
     name,
     email,
@@ -7,6 +39,17 @@ function signup(
     course,
     year
 ) {
+
+    const passwordCheck =
+        validatePasswordPolicy(password);
+
+    if (!passwordCheck.success) {
+        return {
+            success: false,
+            message: passwordCheck.message,
+            type: "error"
+        };
+    }
 
     let users = getData("users");
 
@@ -41,6 +84,49 @@ function signup(
         message: "Account created successfully! Redirecting to login...",
         type: "success"
     };
+}
+
+function resetPassword(email, newPassword) {
+
+    const passwordCheck =
+        validatePasswordPolicy(newPassword);
+
+    if (!passwordCheck.success) {
+        return {
+            success: false,
+            message: passwordCheck.message,
+            type: "error"
+        };
+    }
+
+    const users =
+        getData("users");
+
+    const userIndex =
+        users.findIndex(user => user.email === email);
+
+    if (userIndex === -1) {
+        return {
+            success: false,
+            message: "No account found with this email. Create an account first.",
+            type: "error"
+        };
+    }
+
+    users[userIndex].password =
+        newPassword;
+
+    saveData(
+        "users",
+        users
+    );
+
+    return {
+        success: true,
+        message: "Password reset successfully. Please login with the new password.",
+        type: "success"
+    };
+
 }
 
 
@@ -97,7 +183,7 @@ function logout() {
         "success",
         {
             duration: 900,
-            redirectTo: "login.html"
+            redirectTo: "index.html"
         }
     );
 
@@ -148,6 +234,27 @@ function redirectIfLoggedIn() {
 
 // ---------- Signup Form ----------
 const signupForm = document.getElementById("signupForm");
+const passwordInput = document.getElementById("password");
+const passwordHint = document.getElementById("passwordHint");
+
+if (passwordInput && passwordHint) {
+
+    passwordInput.addEventListener("input", function () {
+
+        const result =
+            validatePasswordPolicy(passwordInput.value);
+
+        passwordHint.textContent =
+            result.message;
+
+        passwordHint.classList.toggle(
+            "valid",
+            result.success
+        );
+
+    });
+
+}
 
 if (signupForm) {
 
@@ -205,6 +312,27 @@ if (signupForm) {
 
 // ---------- Login Form ----------
 const loginForm = document.getElementById("loginForm");
+const resetPasswordForm = document.getElementById("resetPasswordForm");
+const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
+const backToLoginBtn = document.getElementById("backToLoginBtn");
+
+if (forgotPasswordBtn && resetPasswordForm && loginForm) {
+
+    forgotPasswordBtn.addEventListener("click", function () {
+        loginForm.hidden = true;
+        resetPasswordForm.hidden = false;
+    });
+
+}
+
+if (backToLoginBtn && resetPasswordForm && loginForm) {
+
+    backToLoginBtn.addEventListener("click", function () {
+        resetPasswordForm.hidden = true;
+        loginForm.hidden = false;
+    });
+
+}
 
 if (loginForm) {
 
@@ -231,6 +359,50 @@ if (loginForm) {
                 : {}
         );
 
+
+    });
+
+}
+
+if (resetPasswordForm) {
+
+    resetPasswordForm.addEventListener("submit", function (e) {
+
+        e.preventDefault();
+
+        const email =
+            document.getElementById("resetEmail").value;
+
+        const newPassword =
+            document.getElementById("newPassword").value;
+
+        const confirmNewPassword =
+            document.getElementById("confirmNewPassword").value;
+
+        if (newPassword !== confirmNewPassword) {
+            showAppMessage(
+                "New passwords do not match.",
+                "error"
+            );
+            return;
+        }
+
+        const result =
+            resetPassword(
+                email,
+                newPassword
+            );
+
+        showAppMessage(
+            result.message,
+            result.type
+        );
+
+        if (result.success) {
+            resetPasswordForm.reset();
+            resetPasswordForm.hidden = true;
+            loginForm.hidden = false;
+        }
 
     });
 

@@ -81,13 +81,76 @@
 }
 
 .pinned-section h3,
-.all-notes h3{
+.all-notes h3,
+.restore-header h3{
     margin:14px 0 10px;
     color:#334155;
     font-size:.78rem;
     font-weight:900;
     letter-spacing:.08em;
     text-transform:uppercase;
+}
+
+.restore-panel{
+    margin:0 0 14px;
+    padding:14px;
+    border:1px solid rgba(148,163,184,.22);
+    border-radius:18px;
+    background:rgba(248,250,252,.64);
+}
+
+.restore-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.restore-header span{
+    color:#2563eb;
+    font-size:.72rem;
+    font-weight:900;
+    text-transform:uppercase;
+}
+
+.restore-list{
+    display:grid;
+    gap:8px;
+}
+
+.restore-item{
+    display:grid;
+    gap:8px;
+    padding:12px;
+    border-radius:14px;
+    border:1px solid rgba(148,163,184,.2);
+    background:rgba(255,255,255,.72);
+}
+
+.restore-item strong,
+.restore-item span{
+    display:block;
+}
+
+.restore-item strong{
+    color:#0f172a;
+    font-size:.92rem;
+}
+
+.restore-item span{
+    margin-top:4px;
+    color:#64748b;
+    font-size:.76rem;
+}
+
+.restore-item button{
+    border:none;
+    border-radius:11px;
+    padding:9px 11px;
+    color:white;
+    background:linear-gradient(135deg,#10b981,#06b6d4);
+    cursor:pointer;
+    font-weight:900;
 }
 
 .notes-list{
@@ -346,7 +409,8 @@ body.dark .note-excerpt{
 }
 
 body.dark .notes-sidebar,
-body.dark .note-editor{
+body.dark .note-editor,
+body.dark .restore-panel{
     background:rgba(15,23,42,.78);
     border-color:rgba(148,163,184,.22);
 }
@@ -370,14 +434,20 @@ body.dark .note-item.active{
 }
 
 body.dark .note-title,
+body.dark .restore-item strong,
 body.dark .note-actions .btn,
 body.dark .icon-btn{
     color:var(--icon-color);
 }
 
 body.dark .note-actions .btn,
-body.dark .icon-btn{
+body.dark .icon-btn,
+body.dark .restore-item{
     background:rgba(96,165,250,.12);
+}
+
+body.dark .restore-item span{
+    color:#cbd5e1;
 }
 
 @media (max-width: 900px){

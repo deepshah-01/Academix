@@ -112,6 +112,43 @@ function showPendingAppMessage() {
 
 }
 
+function getDeletedItems(key) {
+
+    return getData(key);
+
+}
+
+function rememberDeletedItem(key, item) {
+
+    const deletedItems =
+        getDeletedItems(key);
+
+    deletedItems.unshift({
+        deletedId: `${key}-${Date.now()}`,
+        deletedAt: new Date().toLocaleString(),
+        item
+    });
+
+    saveData(
+        key,
+        deletedItems.slice(0, 5)
+    );
+
+}
+
+function removeDeletedItem(key, deletedId) {
+
+    const deletedItems =
+        getDeletedItems(key)
+            .filter(item => item.deletedId !== deletedId);
+
+    saveData(
+        key,
+        deletedItems
+    );
+
+}
+
 // Protect pages
 function protectPage() {
 
@@ -148,7 +185,7 @@ function logout() {
         "success",
         {
             duration: 900,
-            redirectTo: "login.html"
+            redirectTo: "index.html"
         }
     );
 

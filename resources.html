@@ -70,12 +70,21 @@
                 required
             >
 
-            <input
-                type="text"
-                id="subject"
-                placeholder="Subject"
-                required
-            >
+            <div class="subject-manager">
+                <label for="subject">Subject Folder</label>
+                <select id="subject" required></select>
+
+                <div class="new-subject-row">
+                    <input
+                        type="text"
+                        id="newSubjectInput"
+                        placeholder="Add subject once, then select it"
+                    >
+                    <button id="addSubjectBtn" type="button">
+                        Add Subject
+                    </button>
+                </div>
+            </div>
 
 
             <label>Resource Type</label>
@@ -102,6 +111,16 @@
                 placeholder="Paste Resource Link (optional if uploading a file)"
             >
 
+            <div class="folder-manager">
+                <button id="connectFolderBtn" type="button">
+                    Connect Device Folder
+                </button>
+                <p id="folderStatus" class="form-hint">
+                    For PDFs/PPTs/files, connect a folder first. Academix will create
+                    Academix / Subject folders when your browser supports it.
+                </p>
+            </div>
+
             <label for="fileUpload">Or upload a local file</label>
 
             <input
@@ -111,7 +130,7 @@
             >
 
             <p class="form-hint">
-                If there is no link, choose a local file. Small files are stored in your browser using localStorage.
+                Links stay in the app. Uploaded files are saved to your connected device folder, not inside localStorage.
             </p>
 
             <p id="fileName" class="file-name"></p>
@@ -138,6 +157,14 @@
             id="searchResource"
             placeholder="🔍Search resources..."
         >
+
+        <section class="restore-panel">
+            <div class="restore-header">
+                <h2>Last Deleted Resources</h2>
+                <span>Max 5</span>
+            </div>
+            <div id="deletedResourcesList" class="restore-list"></div>
+        </section>
 
         <div class="filter-buttons">
             <button class="filter-btn" data-type="ALL" onclick="setFilter('ALL', this)">

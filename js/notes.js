@@ -6,6 +6,7 @@ const noteState = {
 };
 
 const STORAGE_KEY = 'academix_notes';
+const DELETED_NOTES_KEY = 'academix_deleted_notes';
 
 function saveToLocalStorage() {
     saveData(STORAGE_KEY, noteState.notes);
@@ -75,6 +76,7 @@ const newNoteBtn = document.getElementById('newNoteBtn');
 const searchNote = document.getElementById('searchNote');
 const pinnedList = document.getElementById('pinnedList');
 const notesList = document.getElementById('notesList');
+const deletedNotesList = document.getElementById('deletedNotesList');
 const noteTitle = document.getElementById('noteTitle');
 const noteContent = document.getElementById('noteContent');
 const noteTags = document.getElementById('noteTags');
@@ -190,6 +192,37 @@ function renderNotes() {
         notesList.innerHTML = '<div class="empty-note">No notes yet</div>';
     }
     normalNotes.forEach(note => notesList.appendChild(createNoteItem(note)));
+    renderDeletedNotes();
+}
+
+function renderDeletedNotes() {
+    if (!deletedNotesList) {
+        return;
+    }
+
+    const deletedNotes =
+        getDeletedItems(DELETED_NOTES_KEY);
+
+    if (deletedNotes.length === 0) {
+        deletedNotesList.innerHTML =
+            '<div class="empty-note">No deleted notes</div>';
+        return;
+    }
+
+    deletedNotesList.innerHTML =
+        deletedNotes
+            .map(deletedNote => `
+                <div class="restore-item">
+                    <div>
+                        <strong>${deletedNote.item.title || "Untitled note"}</strong>
+                        <span>Deleted: ${deletedNote.deletedAt}</span>
+                    </div>
+                    <button type="button" onclick="restoreNote('${deletedNote.deletedId}')">
+                        Restore
+                    </button>
+                </div>
+            `)
+            .join("");
 }
 
 function setEditorState(active) {
@@ -312,6 +345,18 @@ function saveNote() {
 }
 
 function removeNote(id) {
+    const deletedNote =
+        noteState.notes.find(note => note.id === id);
+
+    if (!deletedNote) {
+        return;
+    }
+
+    rememberDeletedItem(
+        DELETED_NOTES_KEY,
+        deletedNote
+    );
+
     noteState.notes = noteState.notes.filter(note => note.id !== id);
     if (noteState.selectedId === id) {
         resetEditor();
@@ -321,6 +366,45 @@ function removeNote(id) {
     );
     saveToLocalStorage();
     renderNotes();
+}
+
+function restoreNote(deletedId) {
+    const deletedNotes =
+        getDeletedItems(DELETED_NOTES_KEY);
+
+    const deletedNote =
+        deletedNotes.find(item => item.deletedId === deletedId);
+
+    if (!deletedNote) {
+        return;
+    }
+
+    const restoredNote = {
+        ...deletedNote.item,
+        id: noteState.notes.some(note => note.id === deletedNote.item.id)
+            ? `note-${Date.now()}`
+            : deletedNote.item.id
+    };
+
+    noteState.notes.unshift(
+        normalizeNote(restoredNote)
+    );
+
+    removeDeletedItem(
+        DELETED_NOTES_KEY,
+        deletedId
+    );
+
+    saveToLocalStorage();
+    addActivity(
+        "Restored note : " +
+        restoredNote.title
+    );
+    renderNotes();
+    showAppMessage(
+        "Note restored successfully.",
+        "success"
+    );
 }
 
 function togglePin(id) {

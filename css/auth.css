@@ -222,6 +222,47 @@ body{
     line-height:1.5;
 }
 
+.hint.valid{
+    color:#34d399;
+}
+
+.text-action,
+.secondary-auth-btn{
+    width:100%;
+    border:none;
+    border-radius:14px;
+    padding:13px 16px;
+    cursor:pointer;
+    font-weight:800;
+    transition:transform .2s ease, background .2s ease;
+}
+
+.text-action{
+    margin-top:12px;
+    color:#93c5fd;
+    background:rgba(96,165,250,.1);
+    border:1px solid rgba(96,165,250,.14);
+}
+
+.secondary-auth-btn{
+    margin-top:0;
+    color:#e2e8f0;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.12);
+}
+
+.text-action:hover,
+.secondary-auth-btn:hover{
+    transform:translateY(-2px);
+    background:rgba(96,165,250,.16);
+}
+
+.reset-form{
+    margin-top:16px;
+    padding-top:16px;
+    border-top:1px solid rgba(255,255,255,.12);
+}
+
 .app-toast{
     position:fixed;
     right:24px;

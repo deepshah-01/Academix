@@ -77,7 +77,7 @@ function logout(){
         "success",
         {
             duration: 900,
-            redirectTo: "login.html"
+            redirectTo: "index.html"
         }
     );
 

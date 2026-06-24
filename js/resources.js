@@ -1,8 +1,12 @@
 protectPage();
 
+const SUBJECTS_KEY = "academix_subjects";
+const DELETED_RESOURCES_KEY = "academix_deleted_resources";
+
 let resources = getData("resources");
 let editId = null;
 let currentFilter = "ALL";
+let academixDirectoryHandle = null;
 
 const resourceForm = document.getElementById("resourceForm");
 const resourceList = document.getElementById("resourceList");
@@ -13,17 +17,172 @@ const typeInput = document.getElementById("type");
 const urlInput = document.getElementById("url");
 const fileInput = document.getElementById("fileUpload");
 const tagsInput = document.getElementById("tags");
+const newSubjectInput = document.getElementById("newSubjectInput");
+const addSubjectBtn = document.getElementById("addSubjectBtn");
+const connectFolderBtn = document.getElementById("connectFolderBtn");
+const folderStatus = document.getElementById("folderStatus");
+const deletedResourcesList = document.getElementById("deletedResourcesList");
 const fileNameLabel = document.getElementById("fileName");
 const submitButton = resourceForm.querySelector('button[type="submit"]');
 
 searchResource.addEventListener("input", renderResources);
 fileInput.addEventListener("change", updateFileLabel);
+addSubjectBtn.addEventListener("click", addSubjectFromInput);
+connectFolderBtn.addEventListener("click", connectDeviceFolder);
 
 function normalizeTags(rawTags) {
     return rawTags
         .split(",")
         .map(tag => tag.trim())
         .filter(tag => tag !== "");
+}
+
+function normalizeSubject(subject) {
+    return subject
+        .trim()
+        .replace(/[<>:"/\\|?*]+/g, "")
+        .replace(/\s+/g, " ");
+}
+
+function getSubjects() {
+    return getData(SUBJECTS_KEY);
+}
+
+function saveSubjects(subjects) {
+    saveData(
+        SUBJECTS_KEY,
+        [...new Set(subjects.map(normalizeSubject).filter(Boolean))]
+    );
+}
+
+function ensureSubject(subject) {
+    const normalizedSubject =
+        normalizeSubject(subject);
+
+    if (!normalizedSubject) {
+        return "";
+    }
+
+    const subjects =
+        getSubjects();
+
+    if (!subjects.includes(normalizedSubject)) {
+        subjects.push(normalizedSubject);
+        saveSubjects(subjects);
+    }
+
+    return normalizedSubject;
+}
+
+function renderSubjectOptions(selectedSubject = "") {
+    const subjects =
+        getSubjects();
+
+    subjectInput.innerHTML =
+        subjects.length === 0
+            ? '<option value="">Add a subject first</option>'
+            : '<option value="">Choose subject</option>';
+
+    subjects.forEach(subject => {
+        const option =
+            document.createElement("option");
+
+        option.value = subject;
+        option.textContent = subject;
+        option.selected = subject === selectedSubject;
+        subjectInput.appendChild(option);
+    });
+}
+
+function addSubjectFromInput() {
+    const subject =
+        normalizeSubject(newSubjectInput.value);
+
+    if (!subject) {
+        showAppMessage(
+            "Enter a subject name first.",
+            "error"
+        );
+        return;
+    }
+
+    const savedSubject =
+        ensureSubject(subject);
+
+    newSubjectInput.value = "";
+    renderSubjectOptions(savedSubject);
+    subjectInput.value = savedSubject;
+
+    showAppMessage(
+        `Subject "${savedSubject}" added.`,
+        "success"
+    );
+}
+
+async function connectDeviceFolder() {
+    if (!window.showDirectoryPicker) {
+        showAppMessage(
+            "Your browser does not support direct folder saving. Use a Chromium browser on desktop for this feature.",
+            "error"
+        );
+        return;
+    }
+
+    try {
+        const rootHandle =
+            await window.showDirectoryPicker({
+                mode: "readwrite"
+            });
+
+        academixDirectoryHandle =
+            await rootHandle.getDirectoryHandle(
+                "Academix",
+                { create: true }
+            );
+
+        folderStatus.textContent =
+            "Connected. Files will save into Academix / Subject folders.";
+
+        showAppMessage(
+            "Device folder connected.",
+            "success"
+        );
+    } catch (error) {
+        showAppMessage(
+            "Folder connection cancelled or blocked.",
+            "error"
+        );
+    }
+}
+
+async function saveFileToDeviceFolder(file, subject) {
+    if (!window.showDirectoryPicker) {
+        throw new Error("Direct device-folder saving is not supported in this browser.");
+    }
+
+    if (!academixDirectoryHandle) {
+        throw new Error("Connect a device folder before uploading files.");
+    }
+
+    const subjectFolder =
+        await academixDirectoryHandle.getDirectoryHandle(
+            subject,
+            { create: true }
+        );
+
+    const fileHandle =
+        await subjectFolder.getFileHandle(
+            file.name,
+            { create: true }
+        );
+
+    const writable =
+        await fileHandle.createWritable();
+
+    await writable.write(file);
+    await writable.close();
+
+    return `Academix/${subject}/${file.name}`;
 }
 
 function updateFileLabel() {
@@ -39,19 +198,10 @@ function updateFileLabel() {
         : "";
 }
 
-function readFileAsDataUrl(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = () => reject(new Error("Could not read the selected file."));
-        reader.readAsDataURL(file);
-    });
-}
-
 function resetFormState() {
     editId = null;
     resourceForm.reset();
+    renderSubjectOptions();
     submitButton.textContent = "Add Resource";
     fileNameLabel.textContent = "";
     urlInput.placeholder = "Paste Resource Link (optional if uploading a file)";
@@ -62,14 +212,20 @@ function setFormStateForEdit(resource) {
     submitButton.textContent = "Update Resource";
 
     titleInput.value = resource.title || "";
-    subjectInput.value = resource.subject || "";
+    const selectedSubject =
+        ensureSubject(resource.subject || "");
+
+    renderSubjectOptions(selectedSubject);
+    subjectInput.value = selectedSubject;
     typeInput.value = resource.type || "LINK";
     urlInput.value = resource.originalUrl || (resource.sourceType === "LINK" ? resource.url || "" : "");
     tagsInput.value = Array.isArray(resource.tags) ? resource.tags.join(", ") : "";
     fileInput.value = "";
 
-    if (resource.sourceType === "FILE" && resource.fileName) {
-        fileNameLabel.textContent = `Current file: ${resource.fileName}`;
+    if ((resource.sourceType === "FILE" || resource.sourceType === "DEVICE_FILE") && resource.fileName) {
+        fileNameLabel.textContent = resource.storedPath
+            ? `Current device file: ${resource.storedPath}`
+            : `Current file: ${resource.fileName}`;
     } else {
         fileNameLabel.textContent = "";
     }
@@ -77,7 +233,7 @@ function setFormStateForEdit(resource) {
 
 async function buildResourcePayload() {
     const title = titleInput.value.trim();
-    const subject = subjectInput.value.trim();
+    const subject = normalizeSubject(subjectInput.value);
     const type = typeInput.value;
     const originalUrl = urlInput.value.trim();
     const selectedFile = fileInput.files && fileInput.files[0];
@@ -87,7 +243,7 @@ async function buildResourcePayload() {
         : null;
 
     if (!title || !subject) {
-        throw new Error("Please fill in the title and subject.");
+        throw new Error("Please fill in the title and choose a subject.");
     }
 
     let resolvedUrl = originalUrl || (existingResource ? existingResource.url : "");
@@ -95,17 +251,22 @@ async function buildResourcePayload() {
     let fileName = existingResource?.fileName || "";
     let fileType = existingResource?.fileType || "";
     let savedOriginalUrl = originalUrl || existingResource?.originalUrl || "";
+    let storedPath = existingResource?.storedPath || "";
 
     if (selectedFile) {
-        resolvedUrl = await readFileAsDataUrl(selectedFile);
-        sourceType = "FILE";
+        storedPath = await saveFileToDeviceFolder(
+            selectedFile,
+            subject
+        );
+        resolvedUrl = originalUrl;
+        sourceType = "DEVICE_FILE";
         fileName = selectedFile.name;
         fileType = selectedFile.type;
         savedOriginalUrl = originalUrl;
     }
 
-    if (!resolvedUrl) {
-        throw new Error("Please paste a link or choose a local file.");
+    if (!resolvedUrl && !storedPath) {
+        throw new Error("Please paste a link or connect a folder and choose a local file.");
     }
 
     return {
@@ -117,12 +278,29 @@ async function buildResourcePayload() {
         sourceType,
         fileName,
         fileType,
+        storedPath,
         tags,
     };
 }
 
 function saveResources() {
     saveData("resources", resources);
+}
+
+function seedSubjectsFromResources() {
+    const subjects =
+        getSubjects();
+
+    resources.forEach(resource => {
+        const subject =
+            normalizeSubject(resource.subject || "");
+
+        if (subject && !subjects.includes(subject)) {
+            subjects.push(subject);
+        }
+    });
+
+    saveSubjects(subjects);
 }
 
 function upsertResource(resourceData) {
@@ -165,6 +343,7 @@ resourceForm.addEventListener("submit", async event => {
         upsertResource(resourceData);
         saveResources();
         renderResources();
+        renderDeletedResources();
         resetFormState();
     } catch (error) {
         showAppMessage(
@@ -205,9 +384,11 @@ function renderResources() {
 
     filteredResources.forEach(resource => {
         const tags = Array.isArray(resource.tags) ? resource.tags : [];
-        const sourceText = resource.sourceType === "FILE"
-            ? `Local file${resource.fileName ? `: ${resource.fileName}` : ""}`
-            : "Link";
+        const sourceText = resource.sourceType === "DEVICE_FILE"
+            ? `Device folder${resource.storedPath ? `: ${resource.storedPath}` : ""}`
+            : resource.sourceType === "FILE"
+                ? `Legacy browser file${resource.fileName ? `: ${resource.fileName}` : ""}`
+                : "Link";
 
         resourceList.innerHTML += `
             <div class="resource-card">
@@ -240,10 +421,89 @@ function renderResources() {
     });
 }
 
+function renderDeletedResources() {
+    if (!deletedResourcesList) {
+        return;
+    }
+
+    const deletedResources =
+        getDeletedItems(DELETED_RESOURCES_KEY);
+
+    if (deletedResources.length === 0) {
+        deletedResourcesList.innerHTML =
+            '<div class="empty-state compact">No deleted resources</div>';
+        return;
+    }
+
+    deletedResourcesList.innerHTML =
+        deletedResources
+            .map(deletedResource => `
+                <div class="restore-item">
+                    <div>
+                        <strong>${deletedResource.item.title || "Untitled resource"}</strong>
+                        <span>${deletedResource.item.subject || "No subject"} • Deleted: ${deletedResource.deletedAt}</span>
+                    </div>
+                    <button type="button" onclick="restoreResource('${deletedResource.deletedId}')">
+                        Restore
+                    </button>
+                </div>
+            `)
+            .join("");
+}
+
+function restoreResource(deletedId) {
+    const deletedResources =
+        getDeletedItems(DELETED_RESOURCES_KEY);
+
+    const deletedResource =
+        deletedResources.find(item => item.deletedId === deletedId);
+
+    if (!deletedResource) {
+        return;
+    }
+
+    const restoredResource = {
+        ...deletedResource.item,
+        id: resources.some(resource => resource.id === deletedResource.item.id)
+            ? Date.now()
+            : deletedResource.item.id
+    };
+
+    ensureSubject(restoredResource.subject || "");
+    resources.unshift(restoredResource);
+
+    removeDeletedItem(
+        DELETED_RESOURCES_KEY,
+        deletedId
+    );
+
+    saveResources();
+    addActivity(`Restored resource : ${restoredResource.title}`);
+    renderSubjectOptions(restoredResource.subject || "");
+    renderResources();
+    renderDeletedResources();
+    showAppMessage(
+        "Resource restored successfully.",
+        "success"
+    );
+}
+
 function openResource(id) {
     const resource = resources.find(item => item.id === id);
 
-    if (!resource || !resource.url) {
+    if (!resource) {
+        return;
+    }
+
+    if (resource.sourceType === "DEVICE_FILE" && !resource.url) {
+        showAppMessage(
+            `Saved on device at ${resource.storedPath}. Open it from your file manager.`,
+            "info"
+        );
+        return;
+    }
+
+    if (!resource.url) {
         showAppMessage(
             "This resource does not have a link or uploaded file.",
             "error"
@@ -281,10 +541,16 @@ function deleteResource(id) {
 
     if (!deletedResource) return;
 
+    rememberDeletedItem(
+        DELETED_RESOURCES_KEY,
+        deletedResource
+    );
+
     resources = resources.filter(resource => resource.id !== id);
     saveResources();
     addActivity(`Deleted resource : ${deletedResource.title}`);
     renderResources();
+    renderDeletedResources();
 }
 
 function toggleBookmark(id) {
@@ -331,7 +597,10 @@ function getIcon(type) {
     }
 }
 
+seedSubjectsFromResources();
+renderSubjectOptions();
 renderResources();
+renderDeletedResources();
 
 // Initialize active filter button on load
 const _initialBtn = document.querySelector(`.filter-buttons .filter-btn[data-type="${currentFilter}"]`);
