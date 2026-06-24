@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Academix</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="dashboard-page">
+
+    <aside class="sidebar">
+
+        <h2 class="logo">Academix</h2>
+
+        <ul>
+
+            <li class="active">
+                <a href="dashboard.html">
+                    &#127968; Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="attendance.html">
+                    &#128202; Attendance
+                </a>
+            </li>
+
+            <li>
+                <a href="notes.html">
+                    &#128218; Notes
+                </a>
+            </li>
+
+            <li>
+                <a href="resources.html">
+                    &#128196; Resources
+                </a>
+            </li>
+
+            <li>
+                <a href="bookmarks.html">
+                    &#128278; Bookmarks
+                </a>
+            </li>
+
+            <li>
+                <a href="search.html">
+                    &#128269; Global Search
+                </a>
+            </li>
+
+            <li>
+                <a href="profile.html">
+                    &#128100; Profile
+                </a>
+            </li>
+
+            <li onclick="logout()">
+                &#128682; Logout
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <main class="main-content">
+
+        <div class="dashboard-shell">
+
+            <div class="top-bar">
+                <div>
+                    <span class="page-kicker">Student Command Center</span>
+                    <h1 id="welcome">Welcome back</h1>
+                </div>
+
+                <div class="top-actions">
+                    <button class="ghost-action" id="themeBtn" type="button">
+                        &#127769; Dark Mode
+                    </button>
+                    <a class="primary-action" href="notes.html">
+                        New Study Session
+                    </a>
+                </div>
+            </div>
+
+            <section class="dashboard-hero" aria-label="Dashboard summary">
+                <div class="hero-content">
+                    <span class="hero-pill">Live workspace</span>
+                    <h2>Organize every note, link, and bookmark from one cinematic study hub.</h2>
+                    <p>
+                        Academix keeps your learning assets connected, searchable, and ready
+                        when your next deep-work sprint begins.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="search.html">Explore Library</a>
+                        <a href="resources.html">Add Resource</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="orbital-ring ring-one"></div>
+                    <div class="orbital-ring ring-two"></div>
+                    <div class="core-orb">AX</div>
+                    <span class="floating-chip chip-one">Notes synced</span>
+                    <span class="floating-chip chip-two">Bookmarks ready</span>
+                    <span class="floating-chip chip-three">Resources mapped</span>
+                </div>
+            </section>
+
+            <section class="cards" aria-label="Academix statistics">
+
+                <article class="card metric-card" tabindex="0">
+                    <div class="metric-icon">&#128218;</div>
+                    <div>
+                        <span class="metric-label">Total Notes</span>
+                        <p id="notesCount">0 Files</p>
+                    </div>
+                    <span class="metric-trend">Library</span>
+                </article>
+
+                <article class="card metric-card" tabindex="0">
+                    <div class="metric-icon">&#128204;</div>
+                    <div>
+                        <span class="metric-label">Pinned Notes</span>
+                        <p id="pinnedNotesCount">0</p>
+                    </div>
+                    <span class="metric-trend">Priority</span>
+                </article>
+
+                <article class="card metric-card" tabindex="0">
+                    <div class="metric-icon">&#11088;</div>
+                    <div>
+                        <span class="metric-label">Bookmarked Notes</span>
+                        <p id="bookmarkedNotesCount">0</p>
+                    </div>
+                    <span class="metric-trend">Saved</span>
+                </article>
+
+                <article class="card metric-card" tabindex="0">
+                    <div class="metric-icon">&#128196;</div>
+                    <div>
+                        <span class="metric-label">Resources</span>
+                        <p id="resourcesCount">0 Links</p>
+                    </div>
+                    <span class="metric-trend">Research</span>
+                </article>
+
+                <article class="card metric-card" tabindex="0">
+                    <div class="metric-icon">&#128161;</div>
+                    <div>
+                        <span class="metric-label">Saved Resources</span>
+                        <p id="bookmarkedResourcesCount">0</p>
+                    </div>
+                    <span class="metric-trend">Useful</span>
+                </article>
+
+                <article class="card metric-card" tabindex="0">
+                    <div class="metric-icon">&#128278;</div>
+                    <div>
+                        <span class="metric-label">Total Bookmarks</span>
+                        <p id="bookmarksCount">0 Saved</p>
+                    </div>
+                    <span class="metric-trend">Vault</span>
+                </article>
+
+            </section>
+
+            <section class="overview">
+
+                <article class="big-card focus-card">
+                    <span class="section-eyebrow">Today's Overview</span>
+                    <h2>Turn scattered study material into a clean learning system.</h2>
+
+                    <p>
+                        Jump into notes, review your saved resources, scan bookmarks, or
+                        search everything at once from this dashboard.
+                    </p>
+
+                    <div class="focus-grid">
+                        <a href="notes.html">
+                            <span>Write Notes</span>
+                            <strong>Capture ideas</strong>
+                        </a>
+                        <a href="bookmarks.html">
+                            <span>Review Saved</span>
+                            <strong>Revisit key items</strong>
+                        </a>
+                        <a href="attendance.html">
+                            <span>Attendance</span>
+                            <strong>Track consistency</strong>
+                        </a>
+                    </div>
+                </article>
+
+                <aside class="big-card insight-card">
+                    <span class="section-eyebrow">Smart Path</span>
+                    <h2>Suggested Flow</h2>
+
+                    <ol>
+                        <li>Search your existing library.</li>
+                        <li>Pin the most useful notes.</li>
+                        <li>Bookmark resources for revision.</li>
+                    </ol>
+                </aside>
+
+            </section>
+
+            <section class="activity-card">
+
+                <div class="activity-header">
+                    <div>
+                        <span class="section-eyebrow">Live Log</span>
+                        <h2>Recent Activity</h2>
+                    </div>
+                    <a href="bookmarks.html">Open Vault</a>
+                </div>
+
+                <div id="activityList" class="activity-list"></div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <script src="js/storage.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/theme.js"></script>
+
+</body>
+</html>
