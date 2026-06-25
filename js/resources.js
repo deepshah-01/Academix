@@ -6,7 +6,6 @@ const DELETED_RESOURCES_KEY = "academix_deleted_resources";
 let resources = getData("resources");
 let editId = null;
 let currentFilter = "ALL";
-let academixDirectoryHandle = null;
 
 const resourceForm = document.getElementById("resourceForm");
 const resourceList = document.getElementById("resourceList");
@@ -120,25 +119,8 @@ function addSubjectFromInput() {
 }
 
 async function connectDeviceFolder() {
-    if (!window.showDirectoryPicker) {
-        showAppMessage(
-            "Your browser does not support direct folder saving. Use a Chromium browser on desktop for this feature.",
-            "error"
-        );
-        return;
-    }
-
     try {
-        const rootHandle =
-            await window.showDirectoryPicker({
-                mode: "readwrite"
-            });
-
-        academixDirectoryHandle =
-            await rootHandle.getDirectoryHandle(
-                "Academix",
-                { create: true }
-            );
+        await connectAcademixDeviceFolder();
 
         folderStatus.textContent =
             "Connected. Files will save into Academix / Subject folders.";
@@ -148,41 +130,23 @@ async function connectDeviceFolder() {
             "success"
         );
     } catch (error) {
+        if (error.name === "AbortError") {
+            showAppMessage(
+                "Folder connection cancelled.",
+                "error"
+            );
+            return;
+        }
+
         showAppMessage(
-            "Folder connection cancelled or blocked.",
+            error.message || "Folder connection cancelled or blocked.",
             "error"
         );
     }
 }
 
 async function saveFileToDeviceFolder(file, subject) {
-    if (!window.showDirectoryPicker) {
-        throw new Error("Direct device-folder saving is not supported in this browser.");
-    }
-
-    if (!academixDirectoryHandle) {
-        throw new Error("Connect a device folder before uploading files.");
-    }
-
-    const subjectFolder =
-        await academixDirectoryHandle.getDirectoryHandle(
-            subject,
-            { create: true }
-        );
-
-    const fileHandle =
-        await subjectFolder.getFileHandle(
-            file.name,
-            { create: true }
-        );
-
-    const writable =
-        await fileHandle.createWritable();
-
-    await writable.write(file);
-    await writable.close();
-
-    return `Academix/${subject}/${file.name}`;
+    return saveFileToAcademixFolder(file, subject);
 }
 
 function updateFileLabel() {
@@ -488,30 +452,34 @@ function restoreResource(deletedId) {
     );
 }
 
-function openResource(id) {
+async function openResource(id) {
     const resource = resources.find(item => item.id === id);
 
     if (!resource) {
         return;
     }
 
-    if (resource.sourceType === "DEVICE_FILE" && !resource.url) {
-        showAppMessage(
-            `Saved on device at ${resource.storedPath}. Open it from your file manager.`,
-            "info"
-        );
-        return;
-    }
+    try {
+        if (resource.sourceType === "DEVICE_FILE") {
+            await openStoredDeviceFile(resource.storedPath);
+            return;
+        }
 
-    if (!resource.url) {
+        if (resource.url) {
+            window.open(resource.url, "_blank", "noopener,noreferrer");
+            return;
+        }
+
         showAppMessage(
             "This resource does not have a link or uploaded file.",
             "error"
         );
-        return;
+    } catch (error) {
+        showAppMessage(
+            error.message,
+            "error"
+        );
     }
-
-    window.open(resource.url, "_blank", "noopener,noreferrer");
 }
 
 function setFilter(type, el) {
@@ -601,6 +569,13 @@ seedSubjectsFromResources();
 renderSubjectOptions();
 renderResources();
 renderDeletedResources();
+
+restoreAcademixFolderConnection().then(function (isConnected) {
+    if (isConnected && folderStatus) {
+        folderStatus.textContent =
+            "Connected. Files will save into Academix / Subject folders.";
+    }
+});
 
 // Initialize active filter button on load
 const _initialBtn = document.querySelector(`.filter-buttons .filter-btn[data-type="${currentFilter}"]`);

@@ -33,9 +33,14 @@
 </head>
 <body>
 
-    <!-- Sidebar -->
+    <button class="sidebar-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="app-sidebar">
+        <span class="sidebar-toggle-bar" aria-hidden="true"></span>
+        <span class="sidebar-toggle-bar" aria-hidden="true"></span>
+        <span class="sidebar-toggle-bar" aria-hidden="true"></span>
+    </button>
+    <div class="sidebar-overlay" aria-hidden="true"></div>
 
-    <aside class="sidebar">
+    <aside class="sidebar" id="app-sidebar">
 
         <h2 class="logo">
 
@@ -218,6 +223,7 @@
     <script src="js/auth.js"></script>
 
     <script src="js/profile.js"></script>
+    <script src="js/sidebar.js"></script>
     <script src="js/theme.js"></script>
 
 </body>

@@ -31,7 +31,14 @@
 </head>
 <body>
 
-    <aside class="sidebar">
+    <button class="sidebar-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="app-sidebar">
+        <span class="sidebar-toggle-bar" aria-hidden="true"></span>
+        <span class="sidebar-toggle-bar" aria-hidden="true"></span>
+        <span class="sidebar-toggle-bar" aria-hidden="true"></span>
+    </button>
+    <div class="sidebar-overlay" aria-hidden="true"></div>
+
+    <aside class="sidebar" id="app-sidebar">
 
         <h2 class="logo">
 
@@ -132,8 +139,10 @@
     </main>
 
     <script src="js/storage.js"></script>
+    <script src="js/device-folder.js"></script>
 
     <script src="js/search.js"></script>
+    <script src="js/sidebar.js"></script>
     <script src="js/theme.js"></script>
 
 </body>

@@ -146,16 +146,43 @@ function removeBookmark(id, source) {
 
 }
 
-function openResource(url){
+function openBookmarkResource(id) {
+    const resources = getData("resources");
+    const resource = resources.find(function (item) {
+        return item.id == id;
+    });
+
+    if (!resource) {
+        showAppMessage(
+            "Bookmarked resource not found.",
+            "error"
+        );
+        return;
+    }
+
+    if (resource.sourceType === "DEVICE_FILE") {
+        openStoredDeviceFile(resource.storedPath).catch(function (error) {
+            showAppMessage(
+                error.message,
+                "error"
+            );
+        });
+        return;
+    }
+
+    if (!resource.url) {
+        showAppMessage(
+            "This resource does not have a link or device file.",
+            "error"
+        );
+        return;
+    }
 
     window.open(
-
-        url,
-
-        "_blank"
-
+        resource.url,
+        "_blank",
+        "noopener,noreferrer"
     );
-
 }
 
 function editNote(id){
@@ -352,7 +379,7 @@ function    renderBookmarks(){
                     `
                     <button
                         class="open-btn"
-                        onclick="openResource('${item.url}')"
+                        onclick="openBookmarkResource(${item.id})"
                     >
                         Open
                     </button>

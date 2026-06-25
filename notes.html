@@ -15,26 +15,8 @@
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-    <aside class="sidebar">
 
-        <h2 class="logo">Academix</h2>
-
-        <ul>
-            <li><a href = "dashboard.html" >🏠 Dashboard</a></li>
-            <li><a href = "attendance.html" >📊 Attendance</a></li>
-            <li class="active"><a href = "notes.html" >📚 Notes</a></li>
-            <li><a href = "resources.html" >📄 Resources</a></li>
-            <li><a href = "bookmarks.html" >🔖 Bookmarks</a></li>
-            <li>
-                <a href="search.html">
-                    🔍 Global Search
-                </a>
-            </li>
-            <li><a href = "profile.html" >👤 Profile</a></li>
-            <li onclick="logout()">🚪 Logout</li>
-        </ul>
-
-    </aside>
+    <div id="sidebar-mount"></div>
 
     <main class="main-content">
         <h1>📚 My Notes</h1>
@@ -118,6 +100,7 @@
     </main>
     <script src="js/storage.js"></script>
     <script src="js/notes.js"></script>
+    <script src="js/sidebar.js"></script>
     <script src="js/theme.js"></script>
 </body>
 </html>

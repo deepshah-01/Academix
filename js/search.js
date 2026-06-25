@@ -126,7 +126,13 @@ function renderSearch(){
 
                 subtitle: resource.subject,
 
-                url: resource.url
+                id: resource.id,
+
+                url: resource.url,
+
+                sourceType: resource.sourceType,
+
+                storedPath: resource.storedPath
 
             });
 
@@ -186,7 +192,7 @@ function renderSearch(){
 
                 `
                 <button
-                    onclick="window.open('${item.url}')"
+                    onclick="openSearchResource(${item.id})"
                 >
                     Open
                 </button>
@@ -226,6 +232,45 @@ function openNote(id) {
 
 }
 
+
+function openSearchResource(id) {
+    const resources = getData("resources");
+    const resource = resources.find(function (item) {
+        return item.id == id;
+    });
+
+    if (!resource) {
+        showAppMessage(
+            "Resource not found.",
+            "error"
+        );
+        return;
+    }
+
+    if (resource.sourceType === "DEVICE_FILE") {
+        openStoredDeviceFile(resource.storedPath).catch(function (error) {
+            showAppMessage(
+                error.message,
+                "error"
+            );
+        });
+        return;
+    }
+
+    if (!resource.url) {
+        showAppMessage(
+            "This resource does not have a link or device file.",
+            "error"
+        );
+        return;
+    }
+
+    window.open(
+        resource.url,
+        "_blank",
+        "noopener,noreferrer"
+    );
+}
 
 function getResourceIcon(type){
 
